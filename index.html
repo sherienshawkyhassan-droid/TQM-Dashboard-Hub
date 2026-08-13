@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>TQM Analytics Hub</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fa;
+      color: #1f2937;
+      min-height: 100vh;
+    }
+
+    /* ================= HEADER ================= */
+
+    .header {
+      background: linear-gradient(135deg, #003b5c, #006b8f);
+      color: white;
+      padding: 38px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    }
+
+    .header h1 {
+      font-size: 34px;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    .header p {
+      font-size: 15px;
+      opacity: 0.9;
+    }
+
+    .logo {
+      width: 75px;
+      height: 75px;
+      background: white;
+      color: #006b8f;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* ================= MAIN ================= */
+
+    .container {
+      width: 88%;
+      max-width: 1200px;
+      margin: 45px auto;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .welcome h2 {
+      font-size: 30px;
+      color: #003b5c;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #6b7280;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ================= FEATURED CARD ================= */
+
+    .featured-card {
+      background: white;
+      border-radius: 18px;
+      padding: 34px;
+      margin-bottom: 28px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 30px;
+
+      box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+      border-left: 6px solid #00a3ad;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.14);
+    }
+
+    .featured-content {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      flex: 1;
+    }
+
+    .featured-icon {
+      width: 72px;
+      height: 72px;
+      min-width: 72px;
+      background: #e7f6f8;
+      border-radius: 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 34px;
+      color: #006b8f;
+    }
+
+    .featured-card h3 {
+      color: #003b5c;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .featured-card p {
+      color: #6b7280;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    /* ================= DASHBOARD GRID ================= */
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 25px;
+    }
+
+    .dashboard-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      min-height: 250px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      border-top: 5px solid #00a3ad;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.14);
+    }
+
+    /* ================= ICON ================= */
+
+    .icon {
+      width: 58px;
+      height: 58px;
+      background: #e7f6f8;
+      border-radius: 14px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    /* ================= TEXT ================= */
+
+    .dashboard-card h3 {
+      color: #003b5c;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .dashboard-card p {
+      color: #6b7280;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    /* ================= BUTTON ================= */
+
+    .dashboard-button {
+      display: inline-block;
+      background: #006b8f;
+      color: white;
+
+      text-decoration: none;
+      text-align: center;
+
+      padding: 12px 20px;
+      border-radius: 8px;
+
+      font-size: 14px;
+      font-weight: 600;
+
+      transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .dashboard-button:hover {
+      background: #003b5c;
+      transform: translateY(-1px);
+    }
+
+    .featured-button {
+      min-width: 180px;
+    }
+
+    /* ================= FOOTER ================= */
+
+    footer {
+      background: #003b5c;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 70px;
+      font-size: 13px;
+    }
+
+    /* ================= TABLET ================= */
+
+    @media (max-width: 850px) {
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .featured-card {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .featured-button {
+        width: 100%;
+      }
+
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 600px) {
+
+      .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+      }
+
+      .header h1 {
+        font-size: 27px;
+      }
+
+      .container {
+        width: 92%;
+      }
+
+      .featured-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .welcome h2 {
+        font-size: 26px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+  <div>
+    <h1>TQM Analytics Hub</h1>
+    <p>Quality & Performance Management Dashboard Portal</p>
+  </div>
+
+  <div class="logo">
+    TQM
+  </div>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+  <!-- WELCOME -->
+
+  <section class="welcome">
+
+    <h2>Management Dashboards</h2>
+
+    <p>
+      Select a dashboard below to access performance insights,
+      trends and management information.
+    </p>
+
+  </section>
+
+
+  <!-- ================= QUALITY VISITS ================= -->
+
+  <div class="featured-card">
+
+    <div class="featured-content">
+
+      <div class="featured-icon">
+        ✓
+      </div>
+
+      <div>
+        <h3>Quality Visits Dashboard</h3>
+
+        <p>
+          Monitor quality visits, observations, non-conformities,
+          branch performance and quality assessment results.
+        </p>
+      </div>
+
+    </div>
+
+    <a
+      href="https://app.powerbi.com/links/aA1-fZp3oh?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="dashboard-button featured-button">
+      View Dashboard →
+    </a>
+
+  </div>
+
+
+  <!-- ================= OTHER DASHBOARDS ================= -->
+
+  <div class="dashboard-grid">
+
+
+    <!-- IT KPIs -->
+
+    <div class="dashboard-card">
+
+      <div>
+
+        <div class="icon">
+          💻
+        </div>
+
+        <h3>IT KPIs Dashboard</h3>
+
+        <p>
+          Monitor IT tickets, service performance,
+          SLA compliance, closure rates and key
+          technology performance indicators.
+        </p>
+
+      </div>
+
+      <a
+        href="https://app.powerbi.com/links/drNU-TT9dW?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dashboard-button">
+        View Dashboard →
+      </a>
+
+    </div>
+
+
+    <!-- OPERATIONS KPIs -->
+
+    <div class="dashboard-card">
+
+      <div>
+
+        <div class="icon">
+          ⚙
+        </div>
+
+        <h3>Operations KPIs Dashboard</h3>
+
+        <p>
+          Review Operations tickets, service performance,
+          processing trends, SLA results and operational
+          performance indicators.
+        </p>
+
+      </div>
+
+      <a
+        href="https://app.powerbi.com/links/m9-Wr95aPP?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dashboard-button">
+        View Dashboard →
+      </a>
+
+    </div>
+
+
+    <!-- ADMIN KPIs -->
+
+    <div class="dashboard-card">
+
+      <div>
+
+        <div class="icon">
+          📋
+        </div>
+
+        <h3>Admin KPIs Dashboard</h3>
+
+        <p>
+          Track Administration tickets, service delivery,
+          SLA performance, trends and key management
+          performance indicators.
+        </p>
+
+      </div>
+
+      <a
+        href="https://app.powerbi.com/links/qC_V9Q7sr-?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dashboard-button">
+        View Dashboard →
+      </a>
+
+    </div>
+
+
+    <!-- COO INCIDENTS -->
+
+    <div class="dashboard-card">
+
+      <div>
+
+        <div class="icon">
+          ⚠
+        </div>
+
+        <h3>COO Area Incidents Dashboard</h3>
+
+        <p>
+          Monitor incidents across the COO area,
+          root causes, severity, trends, corrective actions
+          and resolution status.
+        </p>
+
+      </div>
+
+      <a
+        href="https://app.powerbi.com/links/bjGcSrQKQu?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="dashboard-button">
+        View Dashboard →
+      </a>
+
+    </div>
+
+
+  </div>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+  Total Quality Management | Performance Monitoring & Analytics
+</footer>
+
+</body>
+</html>
