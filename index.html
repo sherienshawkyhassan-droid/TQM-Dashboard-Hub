@@ -1,507 +1,989 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>TQM Analytics Hub</title>
+<meta charset="UTF-8">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-    }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      background: #f4f7fa;
-      color: #1f2937;
-      min-height: 100vh;
-    }
+<title>TQM Analytics Hub</title>
 
-    /* ================= HEADER ================= */
 
-    .header {
-      background: linear-gradient(135deg, #003b5c, #006b8f);
-      color: white;
-      padding: 38px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-    }
+<style>
 
-    .header h1 {
-      font-size: 34px;
-      font-weight: 600;
-      margin-bottom: 7px;
-    }
+/* ================= GENERAL ================= */
 
-    .header p {
-      font-size: 15px;
-      opacity: 0.9;
-    }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
 
-    .logo {
-      width: 75px;
-      height: 75px;
-      background: white;
-      color: #006b8f;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 700;
-    }
+body {
+    background: #f4f7fa;
+    color: #1f2937;
+    min-height: 100vh;
+}
 
-    /* ================= MAIN ================= */
 
-    .container {
-      width: 88%;
-      max-width: 1200px;
-      margin: 45px auto;
-    }
+/* ================= HEADER ================= */
 
-    .welcome {
-      text-align: center;
-      margin-bottom: 45px;
-    }
+.header {
 
-    .welcome h2 {
-      font-size: 30px;
-      color: #003b5c;
-      margin-bottom: 10px;
-    }
+    background: linear-gradient(
+        135deg,
+        #003b5c,
+        #006b8f
+    );
 
-    .welcome p {
-      color: #6b7280;
-      font-size: 16px;
-      line-height: 1.6;
-    }
+    color: white;
 
-    /* ================= FEATURED CARD ================= */
+    padding: 30px 7%;
 
-    .featured-card {
-      background: white;
-      border-radius: 18px;
-      padding: 34px;
-      margin-bottom: 28px;
+    display: flex;
 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 30px;
+    justify-content: space-between;
 
-      box-shadow: 0 6px 22px rgba(0,0,0,0.08);
-      border-left: 6px solid #00a3ad;
+    align-items: center;
 
-      transition:
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.15);
+}
+
+
+.header h1 {
+
+    font-size: 32px;
+
+    font-weight: 600;
+
+    margin-bottom: 6px;
+}
+
+
+.header p {
+
+    font-size: 15px;
+
+    opacity: 0.9;
+}
+
+
+.logo {
+
+    width: 70px;
+
+    height: 70px;
+
+    background: white;
+
+    color: #006b8f;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+
+/* ================= MAIN ================= */
+
+.container {
+
+    width: 90%;
+
+    max-width: 1250px;
+
+    margin: 40px auto;
+}
+
+
+.welcome {
+
+    text-align: center;
+
+    margin-bottom: 40px;
+}
+
+
+.welcome h2 {
+
+    font-size: 30px;
+
+    color: #003b5c;
+
+    margin-bottom: 10px;
+}
+
+
+.welcome p {
+
+    color: #6b7280;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* ================= DASHBOARD GRID ================= */
+
+.dashboard-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 24px;
+}
+
+
+/* ================= DASHBOARD CARD ================= */
+
+.dashboard-card {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    min-height: 235px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,0.08);
+
+    border-top:
+        5px solid #00a3ad;
+
+    transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-    }
+}
 
-    .featured-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.14);
-    }
 
-    .featured-content {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-      flex: 1;
-    }
+.dashboard-card:hover {
 
-    .featured-icon {
-      width: 72px;
-      height: 72px;
-      min-width: 72px;
-      background: #e7f6f8;
-      border-radius: 16px;
+    transform:
+        translateY(-6px);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    box-shadow:
+        0 14px 30px rgba(0,0,0,0.14);
+}
 
-      font-size: 34px;
-      color: #006b8f;
-    }
 
-    .featured-card h3 {
-      color: #003b5c;
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
+/* ================= QUALITY FEATURED ================= */
 
-    .featured-card p {
-      color: #6b7280;
-      line-height: 1.6;
-      font-size: 15px;
-    }
+.dashboard-card.featured {
 
-    /* ================= DASHBOARD GRID ================= */
+    grid-column:
+        1 / -1;
 
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
-    }
+    min-height: 200px;
 
-    .dashboard-card {
-      background: white;
-      border-radius: 16px;
-      padding: 28px;
-      min-height: 250px;
+    border-top: none;
 
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+    border-left:
+        6px solid #00a3ad;
+}
 
-      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-      border-top: 5px solid #00a3ad;
 
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
-    }
+/* ================= ICONS ================= */
 
-    .dashboard-card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.14);
-    }
+.icon {
 
-    /* ================= ICON ================= */
+    width: 58px;
 
-    .icon {
-      width: 58px;
-      height: 58px;
-      background: #e7f6f8;
-      border-radius: 14px;
+    height: 58px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    background: #e7f6f8;
 
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
+    border-radius: 14px;
 
-    /* ================= TEXT ================= */
+    display: flex;
 
-    .dashboard-card h3 {
-      color: #003b5c;
-      font-size: 20px;
-      margin-bottom: 12px;
-    }
+    align-items: center;
 
-    .dashboard-card p {
-      color: #6b7280;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 25px;
-    }
+    justify-content: center;
 
-    /* ================= BUTTON ================= */
+    font-size: 28px;
 
-    .dashboard-button {
-      display: inline-block;
-      background: #006b8f;
-      color: white;
+    margin-bottom: 18px;
+}
 
-      text-decoration: none;
-      text-align: center;
 
-      padding: 12px 20px;
-      border-radius: 8px;
+/* ================= CARD TEXT ================= */
 
-      font-size: 14px;
-      font-weight: 600;
+.dashboard-card h3 {
 
-      transition:
+    color: #003b5c;
+
+    font-size: 21px;
+
+    margin-bottom: 10px;
+}
+
+
+.dashboard-card p {
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+}
+
+
+/* ================= BUTTON ================= */
+
+.dashboard-button {
+
+    border: none;
+
+    cursor: pointer;
+
+    display: inline-block;
+
+    width: 100%;
+
+    background: #006b8f;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 12px 20px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
         background 0.2s ease,
         transform 0.2s ease;
-    }
+}
 
-    .dashboard-button:hover {
-      background: #003b5c;
-      transform: translateY(-1px);
-    }
 
-    .featured-button {
-      min-width: 180px;
-    }
+.dashboard-button:hover {
 
-    /* ================= FOOTER ================= */
+    background: #003b5c;
 
-    footer {
-      background: #003b5c;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-top: 70px;
-      font-size: 13px;
-    }
+    transform:
+        translateY(-1px);
+}
 
-    /* ================= TABLET ================= */
 
-    @media (max-width: 850px) {
+/* ================= DASHBOARD VIEWER ================= */
 
-      .dashboard-grid {
+.viewer-page {
+
+    display: none;
+
+    width: 100%;
+
+    min-height:
+        calc(100vh - 115px);
+
+    background: #eef2f6;
+
+    padding: 20px;
+}
+
+
+/* ================= VIEWER TOOLBAR ================= */
+
+.viewer-toolbar {
+
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin:
+        0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content:
+        space-between;
+
+    gap: 20px;
+}
+
+
+.back-button {
+
+    border: none;
+
+    cursor: pointer;
+
+    background: #003b5c;
+
+    color: white;
+
+    padding:
+        11px 18px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    font-size: 14px;
+}
+
+
+.back-button:hover {
+
+    background: #006b8f;
+}
+
+
+.viewer-title {
+
+    color: #003b5c;
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    text-align: right;
+
+    flex: 1;
+}
+
+
+/* ================= POWER BI FRAME ================= */
+
+.report-frame-wrapper {
+
+    width: 100%;
+
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    background: white;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.12);
+}
+
+
+.report-frame {
+
+    display: block;
+
+    width: 100%;
+
+    height:
+        calc(100vh - 185px);
+
+    min-height: 650px;
+
+    border: 0;
+
+    background: white;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+
+    background: #003b5c;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 18px;
+
+    margin-top: 60px;
+
+    font-size: 13px;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 850px) {
+
+    .dashboard-grid {
+
         grid-template-columns: 1fr;
-      }
+    }
 
-      .featured-card {
+
+    .dashboard-card.featured {
+
+        grid-column: auto;
+    }
+
+
+    .viewer-toolbar {
+
         flex-direction: column;
+
         align-items: stretch;
-      }
-
-      .featured-button {
-        width: 100%;
-      }
-
     }
 
-    /* ================= MOBILE ================= */
 
-    @media (max-width: 600px) {
+    .viewer-title {
 
-      .header {
+        text-align: left;
+    }
+
+
+    .report-frame {
+
+        height: 75vh;
+
+        min-height: 520px;
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .header {
+
         flex-direction: column;
+
         text-align: center;
-        gap: 20px;
-      }
 
-      .header h1 {
-        font-size: 27px;
-      }
+        gap: 16px;
+    }
 
-      .container {
-        width: 92%;
-      }
 
-      .featured-content {
-        flex-direction: column;
-        text-align: center;
-      }
+    .header h1 {
 
-      .welcome h2 {
         font-size: 26px;
-      }
-
     }
 
-  </style>
+
+    .container {
+
+        width: 94%;
+    }
+
+
+    .welcome h2 {
+
+        font-size: 25px;
+    }
+
+
+    .viewer-page {
+
+        padding: 10px;
+    }
+
+}
+
+</style>
+
 </head>
+
+
 
 <body>
 
-<!-- ================= HEADER ================= -->
 
-<header class="header">
+<!-- ========================================= -->
+<!-- HEADER                                    -->
+<!-- ========================================= -->
 
-  <div>
-    <h1>TQM Analytics Hub</h1>
-    <p>Quality & Performance Management Dashboard Portal</p>
-  </div>
+<header
+    class="header"
+    id="mainHeader">
 
-  <div class="logo">
-    TQM
-  </div>
+    <div>
+
+        <h1>
+            TQM Analytics Hub
+        </h1>
+
+        <p>
+            Quality & Performance Management Dashboard Portal
+        </p>
+
+    </div>
+
+
+    <div class="logo">
+
+        TQM
+
+    </div>
 
 </header>
 
 
-<!-- ================= MAIN ================= -->
 
-<main class="container">
+<!-- ========================================= -->
+<!-- LANDING PAGE                              -->
+<!-- ========================================= -->
 
-  <!-- WELCOME -->
+<main
+    class="container"
+    id="homePage">
 
-  <section class="welcome">
 
-    <h2>Management Dashboards</h2>
+<section class="welcome">
+
+    <h2>
+        Management Dashboards
+    </h2>
 
     <p>
-      Select a dashboard below to access performance insights,
-      trends and management information.
+        Select a dashboard below to access
+        performance insights, trends and
+        management information.
     </p>
 
-  </section>
+</section>
 
 
-  <!-- ================= QUALITY VISITS ================= -->
 
-  <div class="featured-card">
-
-    <div class="featured-content">
-
-      <div class="featured-icon">
-        ✓
-      </div>
-
-      <div>
-        <h3>Quality Visits Dashboard</h3>
-
-        <p>
-          Monitor quality visits, observations, non-conformities,
-          branch performance and quality assessment results.
-        </p>
-      </div>
-
-    </div>
-
-    <a
-      href="https://app.powerbi.com/links/aA1-fZp3oh?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="dashboard-button featured-button">
-      View Dashboard →
-    </a>
-
-  </div>
+<div class="dashboard-grid">
 
 
-  <!-- ================= OTHER DASHBOARDS ================= -->
 
-  <div class="dashboard-grid">
+<!-- ========================================= -->
+<!-- QUALITY VISITS                            -->
+<!-- ========================================= -->
 
+<div class="dashboard-card featured">
 
-    <!-- IT KPIs -->
-
-    <div class="dashboard-card">
-
-      <div>
+    <div>
 
         <div class="icon">
-          💻
+            ✓
         </div>
 
-        <h3>IT KPIs Dashboard</h3>
+        <h3>
+            Quality Visits Dashboard
+        </h3>
 
         <p>
-          Monitor IT tickets, service performance,
-          SLA compliance, closure rates and key
-          technology performance indicators.
+
+            Monitor quality visits,
+            observations, non-conformities,
+            branch performance and quality
+            assessment results.
+
         </p>
-
-      </div>
-
-      <a
-        href="https://app.powerbi.com/links/drNU-TT9dW?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="dashboard-button">
-        View Dashboard →
-      </a>
 
     </div>
 
 
-    <!-- OPERATIONS KPIs -->
+    <button
+        class="dashboard-button"
 
-    <div class="dashboard-card">
+        onclick="openDashboard(
 
-      <div>
+        'Quality Visits Dashboard',
+
+        'https://app.powerbi.com/reportEmbed?reportId=a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99&autoAuth=true&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3'
+
+        )">
+
+        View Dashboard →
+
+    </button>
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- IT KPIs                                   -->
+<!-- ========================================= -->
+
+<div class="dashboard-card">
+
+    <div>
 
         <div class="icon">
-          ⚙
+            💻
         </div>
 
-        <h3>Operations KPIs Dashboard</h3>
+        <h3>
+            IT KPIs Dashboard
+        </h3>
 
         <p>
-          Review Operations tickets, service performance,
-          processing trends, SLA results and operational
-          performance indicators.
+
+            Monitor IT tickets,
+            SLA compliance,
+            closure rates and
+            key technology performance indicators.
+
         </p>
-
-      </div>
-
-      <a
-        href="https://app.powerbi.com/links/m9-Wr95aPP?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="dashboard-button">
-        View Dashboard →
-      </a>
 
     </div>
 
 
-    <!-- ADMIN KPIs -->
+    <button
+        class="dashboard-button"
 
-    <div class="dashboard-card">
+        onclick="openDashboard(
 
-      <div>
+        'IT KPIs Dashboard',
+
+        'https://app.powerbi.com/reportEmbed?reportId=6d7d73ee-36e2-447a-850f-7a940ec52bb2&autoAuth=true&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3'
+
+        )">
+
+        View Dashboard →
+
+    </button>
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- OPERATIONS KPIs                           -->
+<!-- ========================================= -->
+
+<div class="dashboard-card">
+
+    <div>
 
         <div class="icon">
-          📋
+            ⚙
         </div>
 
-        <h3>Admin KPIs Dashboard</h3>
+        <h3>
+            Operations KPIs Dashboard
+        </h3>
 
         <p>
-          Track Administration tickets, service delivery,
-          SLA performance, trends and key management
-          performance indicators.
+
+            Review Operations tickets,
+            service performance,
+            SLA results and operational
+            performance indicators.
+
         </p>
-
-      </div>
-
-      <a
-        href="https://app.powerbi.com/links/qC_V9Q7sr-?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="dashboard-button">
-        View Dashboard →
-      </a>
 
     </div>
 
 
-    <!-- COO INCIDENTS -->
+    <button
+        class="dashboard-button"
 
-    <div class="dashboard-card">
+        onclick="openDashboard(
 
-      <div>
+        'Operations KPIs Dashboard',
+
+        'https://app.powerbi.com/reportEmbed?reportId=4d6d3f56-578d-4ae9-8794-50e3c88b739f&autoAuth=true&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3'
+
+        )">
+
+        View Dashboard →
+
+    </button>
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- ADMIN KPIs                                -->
+<!-- ========================================= -->
+
+<div class="dashboard-card">
+
+    <div>
 
         <div class="icon">
-          ⚠
+            📋
         </div>
 
-        <h3>COO Area Incidents Dashboard</h3>
+        <h3>
+            Admin KPIs Dashboard
+        </h3>
 
         <p>
-          Monitor incidents across the COO area,
-          root causes, severity, trends, corrective actions
-          and resolution status.
+
+            Track Administration tickets,
+            service delivery,
+            SLA performance and
+            key management performance indicators.
+
         </p>
-
-      </div>
-
-      <a
-        href="https://app.powerbi.com/links/bjGcSrQKQu?ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3&pbi_source=linkShare"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="dashboard-button">
-        View Dashboard →
-      </a>
 
     </div>
 
 
-  </div>
+    <button
+        class="dashboard-button"
+
+        onclick="openDashboard(
+
+        'Admin KPIs Dashboard',
+
+        'https://app.powerbi.com/reportEmbed?reportId=c3a3c7b7-7600-47fe-b675-9aad74e24e9d&autoAuth=true&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3'
+
+        )">
+
+        View Dashboard →
+
+    </button>
+
+</div>
+
+
+
+<!-- ========================================= -->
+<!-- COO INCIDENTS                             -->
+<!-- ========================================= -->
+
+<div class="dashboard-card">
+
+    <div>
+
+        <div class="icon">
+            ⚠
+        </div>
+
+        <h3>
+            COO Area Incidents Dashboard
+        </h3>
+
+        <p>
+
+            Monitor incidents across the COO area,
+            root causes, severity,
+            trends, corrective actions
+            and resolution status.
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="dashboard-button"
+
+        onclick="openDashboard(
+
+        'COO Area Incidents Dashboard',
+
+        'https://app.powerbi.com/reportEmbed?reportId=14f20afc-1d09-4fc1-bd6c-0e7b41ed69de&autoAuth=true&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3'
+
+        )">
+
+        View Dashboard →
+
+    </button>
+
+</div>
+
+
+</div>
 
 </main>
 
 
-<!-- ================= FOOTER ================= -->
 
-<footer>
-  Total Quality Management | Performance Monitoring & Analytics
+<!-- ========================================= -->
+<!-- POWER BI DASHBOARD VIEWER                 -->
+<!-- ========================================= -->
+
+<section
+    class="viewer-page"
+    id="viewerPage">
+
+
+<div class="viewer-toolbar">
+
+
+    <button
+        class="back-button"
+        onclick="goHome()">
+
+        ← Back to Dashboard Hub
+
+    </button>
+
+
+    <div
+        class="viewer-title"
+        id="viewerTitle">
+
+        Dashboard
+
+    </div>
+
+
+</div>
+
+
+
+<div class="report-frame-wrapper">
+
+
+    <iframe
+
+        id="reportFrame"
+
+        class="report-frame"
+
+        src=""
+
+        frameborder="0"
+
+        allowfullscreen="true">
+
+    </iframe>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- ========================================= -->
+<!-- FOOTER                                    -->
+<!-- ========================================= -->
+
+<footer id="mainFooter">
+
+    Total Quality Management
+    |
+    Performance Monitoring & Analytics
+
 </footer>
 
+
+
+<!-- ========================================= -->
+<!-- JAVASCRIPT                                -->
+<!-- ========================================= -->
+
+<script>
+
+
+function openDashboard(title, url) {
+
+
+    /* Hide landing page */
+
+    document
+        .getElementById("homePage")
+        .style.display = "none";
+
+
+    /* Hide footer */
+
+    document
+        .getElementById("mainFooter")
+        .style.display = "none";
+
+
+    /* Set dashboard title */
+
+    document
+        .getElementById("viewerTitle")
+        .textContent = title;
+
+
+    /* Load Power BI */
+
+    document
+        .getElementById("reportFrame")
+        .src = url;
+
+
+    /* Show dashboard */
+
+    document
+        .getElementById("viewerPage")
+        .style.display = "block";
+
+
+    /* Scroll to top */
+
+    window.scrollTo(0,0);
+
+}
+
+
+
+function goHome() {
+
+
+    /* Remove Power BI report */
+
+    document
+        .getElementById("reportFrame")
+        .src = "";
+
+
+    /* Hide dashboard viewer */
+
+    document
+        .getElementById("viewerPage")
+        .style.display = "none";
+
+
+    /* Show landing page */
+
+    document
+        .getElementById("homePage")
+        .style.display = "block";
+
+
+    /* Show footer */
+
+    document
+        .getElementById("mainFooter")
+        .style.display = "block";
+
+
+    /* Scroll to top */
+
+    window.scrollTo(0,0);
+
+}
+
+
+</script>
+
+
 </body>
+
 </html>
