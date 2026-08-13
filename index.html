@@ -1,848 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>TQM Analytics Hub</title>
-
-<script src="https://cdn.jsdelivr.net/npm/powerbi-client@2.23.1/dist/powerbi.min.js"></script>
-
-<style>
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-}
-
-body {
-    background: #f4f7fa;
-    color: #1f2937;
-}
-
-.header {
-
-    background:
-        linear-gradient(
-            135deg,
-            #003b5c,
-            #006b8f
-        );
-
-    color: white;
-
-    padding: 30px 7%;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-}
-
-.header h1 {
-
-    font-size: 32px;
-
-    margin-bottom: 6px;
-}
-
-.header p {
-
-    opacity: .9;
-}
-
-.logo {
-
-    width: 70px;
-
-    height: 70px;
-
-    background: white;
-
-    color: #006b8f;
-
-    border-radius: 14px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: bold;
-}
-
-.container {
-
-    width: 90%;
-
-    max-width: 1250px;
-
-    margin: 40px auto;
-}
-
-.welcome {
-
-    text-align: center;
-
-    margin-bottom: 40px;
-}
-
-.welcome h2 {
-
-    color: #003b5c;
-
-    font-size: 30px;
-
-    margin-bottom: 10px;
-}
-
-.welcome p {
-
-    color: #6b7280;
-}
-
-.dashboard-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 24px;
-}
-
-.dashboard-card {
-
-    background: white;
-
-    border-radius: 16px;
-
-    padding: 28px;
-
-    min-height: 220px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content:
-        space-between;
-
-    box-shadow:
-        0 5px 18px rgba(0,0,0,.08);
-
-    border-top:
-        5px solid #00a3ad;
-}
-
-.dashboard-card.featured {
-
-    grid-column:
-        1 / -1;
-}
-
-.dashboard-card h3 {
-
-    color: #003b5c;
-
-    margin-bottom: 12px;
-}
-
-.dashboard-card p {
-
-    color: #6b7280;
-
-    line-height: 1.6;
-
-    margin-bottom: 20px;
-}
-
-.dashboard-button {
-
-    border: none;
-
-    cursor: pointer;
-
-    background: #006b8f;
-
-    color: white;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    font-weight: 600;
-}
-
-.dashboard-button:hover {
-
-    background: #003b5c;
-}
-
-#viewerPage {
-
-    display: none;
-
-    width: 100%;
-
-    padding: 16px;
-
-    background: #eef2f6;
-}
-
-.viewer-toolbar {
-
-    max-width: 1600px;
-
-    margin:
-        0 auto 12px;
-
-    display: flex;
-
-    justify-content:
-        space-between;
-
-    align-items: center;
-}
-
-.back-button {
-
-    background: #003b5c;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 8px;
-
-    padding:
-        11px 18px;
-
-    cursor: pointer;
-
-    font-weight: 600;
-}
-
-#viewerTitle {
-
-    color: #003b5c;
-
-    font-size: 21px;
-
-    font-weight: 600;
-}
-
-#reportContainer {
-
-    width: 100%;
-
-    max-width: 1600px;
-
-    height:
-        calc(100vh - 140px);
-
-    min-height: 700px;
-
-    margin: auto;
-
-    background: white;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
-    box-shadow:
-        0 4px 20px rgba(0,0,0,.12);
-}
-
-#reportContainer iframe {
-
-    border: 0 !important;
-}
-
-footer {
-
-    margin-top: 60px;
-
-    background: #003b5c;
-
-    color: white;
-
-    padding: 18px;
-
-    text-align: center;
-}
-
-@media(max-width:800px) {
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TQM Analytics Hub</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/powerbi-client@2.23.1/dist/powerbi.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fa;
+      color: #1f2937;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #003b5c, #006b8f);
+      color: white;
+      padding: 30px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      opacity: .9;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      background: white;
+      color: #006b8f;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1250px;
+      margin: 40px auto;
+    }
+
+    .welcome {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .welcome h2 {
+      color: #003b5c;
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .welcome p {
+      color: #6b7280;
+    }
 
     .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
 
-        grid-template-columns: 1fr;
+    .dashboard-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 5px 18px rgba(0,0,0,.08);
+      border-top: 5px solid #00a3ad;
     }
 
     .dashboard-card.featured {
-
-        grid-column: auto;
+      grid-column: 1 / -1;
     }
 
-}
+    .dashboard-card h3 {
+      color: #003b5c;
+      margin-bottom: 12px;
+    }
 
-</style>
+    .dashboard-card p {
+      color: #6b7280;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .dashboard-button {
+      border: none;
+      cursor: pointer;
+      background: #006b8f;
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .dashboard-button:hover {
+      background: #003b5c;
+    }
+
+    #viewerPage {
+      display: none;
+      width: 100%;
+      padding: 16px;
+      background: #eef2f6;
+    }
+
+    .viewer-toolbar {
+      max-width: 1600px;
+      margin: 0 auto 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-button {
+      background: #003b5c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 11px 18px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    #viewerTitle {
+      color: #003b5c;
+      font-size: 21px;
+      font-weight: 600;
+    }
+
+    #reportContainer {
+      width: 100%;
+      max-width: 1600px;
+      height: calc(100vh - 140px);
+      min-height: 700px;
+      margin: auto;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.12);
+    }
+
+    #reportContainer iframe {
+      border: 0 !important;
+    }
+
+    footer {
+      margin-top: 60px;
+      background: #003b5c;
+      color: white;
+      padding: 18px;
+      text-align: center;
+    }
+
+    @media(max-width:800px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-card.featured {
+        grid-column: auto;
+      }
+    }
+  </style>
 
 </head>
 
-
 <body>
 
-
-<header class="header">
-
-<div>
-
-<h1>TQM Analytics Hub</h1>
-
-<p>
-Quality & Performance Management Dashboard Portal
-</p>
-
-</div>
-
-
-<div class="logo">
-
-TQM
-
-</div>
-
-</header>
-
-
-
-<main
-    class="container"
-    id="homePage">
-
-
-<section class="welcome">
-
-<h2>
-Management Dashboards
-</h2>
-
-<p>
-Select a dashboard to view detailed performance information.
-</p>
-
-</section>
-
-
-
-<div class="dashboard-grid">
-
-
-<!-- QUALITY VISITS -->
-
-<div class="dashboard-card featured">
-
-<div>
-
-<h3>
-Quality Visits Dashboard
-</h3>
-
-<p>
-Monitor quality visits,
-non-conformities,
-branch performance and
-quality assessment results.
-</p>
-
-</div>
-
-<button
-class="dashboard-button"
-onclick="openReport('quality')">
-
-View Dashboard →
-
-</button>
-
-</div>
-
-
-
-<!-- IT -->
-
-<div class="dashboard-card">
-
-<div>
-
-<h3>
-IT KPIs Dashboard
-</h3>
-
-<p>
-Monitor IT tickets,
-SLA performance,
-closure rates and
-technology KPIs.
-</p>
-
-</div>
-
-<button
-class="dashboard-button"
-onclick="openReport('it')">
-
-View Dashboard →
-
-</button>
-
-</div>
-
-
-
-<!-- OPERATIONS -->
-
-<div class="dashboard-card">
-
-<div>
-
-<h3>
-Operations KPIs Dashboard
-</h3>
-
-<p>
-Review operations tickets,
-SLA results and
-operational performance indicators.
-</p>
-
-</div>
-
-<button
-class="dashboard-button"
-onclick="openReport('ops')">
-
-View Dashboard →
-
-</button>
-
-</div>
-
-
-
-<!-- ADMIN -->
-
-<div class="dashboard-card">
-
-<div>
-
-<h3>
-Admin KPIs Dashboard
-</h3>
-
-<p>
-Track Administration tickets,
-service delivery,
-SLA performance and KPIs.
-</p>
-
-</div>
-
-<button
-class="dashboard-button"
-onclick="openReport('admin')">
-
-View Dashboard →
-
-</button>
-
-</div>
-
-
-
-<!-- INCIDENTS -->
-
-<div class="dashboard-card">
-
-<div>
-
-<h3>
-COO Area Incidents Dashboard
-</h3>
-
-<p>
-Monitor incidents,
-root causes,
-severity,
-trends and corrective actions.
-</p>
-
-</div>
-
-<button
-class="dashboard-button"
-onclick="openReport('incidents')">
-
-View Dashboard →
-
-</button>
-
-</div>
-
-
-</div>
-
-</main>
-
-
-
-<section id="viewerPage">
-
-
-<div class="viewer-toolbar">
-
-
-<button
-class="back-button"
-onclick="goHome()">
-
-← Back to Dashboard Hub
-
-</button>
-
-
-<div id="viewerTitle">
-
-Dashboard
-
-</div>
-
-
-</div>
-
-
-<div id="reportContainer"></div>
-
-
-</section>
-
-
-
-<footer id="footer">
-
-Total Quality Management
-|
-Performance Monitoring & Analytics
-
-</footer>
-
-
-
-<script>
-
-const reports = {
-
-    quality: {
-
-        title:
-        "Quality Visits Dashboard",
-
-        id:
-        "a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99",
-
-        embedUrl:
-        "https://app.powerbi.com/reportEmbed?reportId=a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
-    },
-
-
-    it: {
-
-        title:
-        "IT KPIs Dashboard",
-
-        id:
-        "6d7d73ee-36e2-447a-850f-7a940ec52bb2",
-
-        embedUrl:
-        "https://app.powerbi.com/reportEmbed?reportId=6d7d73ee-36e2-447a-850f-7a940ec52bb2&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
-    },
-
-
-    ops: {
-
-        title:
-        "Operations KPIs Dashboard",
-
-        id:
-        "4d6d3f56-578d-4ae9-8794-50e3c88b739f",
-
-        embedUrl:
-        "https://app.powerbi.com/reportEmbed?reportId=4d6d3f56-578d-4ae9-8794-50e3c88b739f&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
-    },
-
-
-    admin: {
-
-        title:
-        "Admin KPIs Dashboard",
-
-        id:
-        "c3a3c7b7-7600-47fe-b675-9aad74e24e9d",
-
-        embedUrl:
-        "https://app.powerbi.com/reportEmbed?reportId=c3a3c7b7-7600-47fe-b675-9aad74e24e9d&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
-    },
-
-
-    incidents: {
-
-        title:
-        "COO Area Incidents Dashboard",
-
-        id:
-        "14f20afc-1d09-4fc1-bd6c-0e7b41ed69de",
-
-        embedUrl:
-        "https://app.powerbi.com/reportEmbed?reportId=14f20afc-1d09-4fc1-bd6c-0e7b41ed69de&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
-    }
-
-};
-
-
-
-async function getPowerBIToken() {
-
-    const response =
-        await fetch(
-            "/api/token"
-        );
-
-
-    if (!response.ok) {
-
-        window.location.href =
-            "/MicrosoftIdentity/Account/SignIn";
-
-        throw new Error(
-            "Authentication required"
-        );
-    }
-
-
-    const result =
-        await response.json();
-
-
-    return result.accessToken;
-}
-
-
-
-async function openReport(reportKey) {
-
-
-    const reportInfo =
-        reports[reportKey];
-
-
-    const token =
-        await getPowerBIToken();
-
-
-    document
-        .getElementById("homePage")
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById("footer")
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById("viewerPage")
-        .style.display =
-        "block";
-
-
-    document
-        .getElementById("viewerTitle")
-        .textContent =
-        reportInfo.title;
-
-
-
-    const models =
-        window[
-            "powerbi-client"
-        ].models;
-
-
-
-    const config = {
-
-        type:
-        "report",
-
-        tokenType:
-        models.TokenType.Aad,
-
-        accessToken:
-        token,
-
-        embedUrl:
-        reportInfo.embedUrl,
-
-        id:
-        reportInfo.id,
-
-
-        settings: {
-
-            panes: {
-
-                filters: {
-
-                    visible:
-                    false
-                },
-
-
-                pageNavigation: {
-
-                    visible:
-                    false
-                }
-
-            },
-
-
-            bars: {
-
-                actionBar: {
-
-                    visible:
-                    false
-                }
-
-            }
-
-        }
+  <header class="header">
+    <div>
+      <h1>TQM Analytics Hub</h1>
+      <p>Quality & Performance Management Dashboard Portal</p>
+    </div>
+    <div class="logo">TQM</div>
+  </header>
+
+  <main class="container" id="homePage">
+    <section class="welcome">
+      <h2>Management Dashboards</h2>
+      <p>Select a dashboard to view detailed performance information.</p>
+    </section>
+
+    <div class="dashboard-grid">
+
+      <div class="dashboard-card featured">
+        <div>
+          <h3>Quality Visits Dashboard</h3>
+          <p>
+            Monitor quality visits, non-conformities, branch performance and
+            quality assessment results.
+          </p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('quality')">View Dashboard →</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <h3>IT KPIs Dashboard</h3>
+          <p>Monitor IT tickets, SLA performance, closure rates and technology KPIs.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('it')">View Dashboard →</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <h3>Operations KPIs Dashboard</h3>
+          <p>Review operations tickets, SLA results and operational performance indicators.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('ops')">View Dashboard →</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <h3>Admin KPIs Dashboard</h3>
+          <p>Track Administration tickets, service delivery, SLA performance and KPIs.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('admin')">View Dashboard →</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <h3>COO Area Incidents Dashboard</h3>
+          <p>Monitor incidents, root causes, severity, trends and corrective actions.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('incidents')">View Dashboard →</button>
+      </div>
+
+    </div>
+  </main>
+
+  <section id="viewerPage">
+    <div class="viewer-toolbar">
+      <button class="back-button" onclick="goHome()">← Back to Dashboard Hub</button>
+      <div id="viewerTitle">Dashboard</div>
+    </div>
+
+    <div id="reportContainer"></div>
+  </section>
+
+  <footer id="footer">
+    Total Quality Management | Performance Monitoring & Analytics
+  </footer>
+
+  <script>
+    const reports = {
+
+      quality: {
+        title: "Quality Visits Dashboard",
+        id: "a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99",
+        embedUrl: "https://app.powerbi.com/reportEmbed?reportId=a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
+      },
+
+      it: {
+        title: "IT KPIs Dashboard",
+        id: "6d7d73ee-36e2-447a-850f-7a940ec52bb2",
+        embedUrl: "https://app.powerbi.com/reportEmbed?reportId=6d7d73ee-36e2-447a-850f-7a940ec52bb2&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
+      },
+
+      ops: {
+        title: "Operations KPIs Dashboard",
+        id: "4d6d3f56-578d-4ae9-8794-50e3c88b739f",
+        embedUrl: "https://app.powerbi.com/reportEmbed?reportId=4d6d3f56-578d-4ae9-8794-50e3c88b739f&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
+      },
+
+      admin: {
+        title: "Admin KPIs Dashboard",
+        id: "c3a3c7b7-7600-47fe-b675-9aad74e24e9d",
+        embedUrl: "https://app.powerbi.com/reportEmbed?reportId=c3a3c7b7-7600-47fe-b675-9aad74e24e9d&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
+      },
+
+      incidents: {
+        title: "COO Area Incidents Dashboard",
+        id: "14f20afc-1d09-4fc1-bd6c-0e7b41ed69de",
+        embedUrl: "https://app.powerbi.com/reportEmbed?reportId=14f20afc-1d09-4fc1-bd6c-0e7b41ed69de&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3"
+      }
 
     };
 
+    async function getPowerBIToken() {
+      const response = await fetch("/api/token");
+      if (!response.ok) {
+        window.location.href = "/MicrosoftIdentity/Account/SignIn";
+        throw new Error("Authentication required");
+      }
+      const result = await response.json();
+      return result.accessToken;
+    }
 
-    const container =
-        document.getElementById(
-            "reportContainer"
-        );
+    async function openReport(reportKey) {
+      const reportInfo = reports[reportKey];
+      const token = await getPowerBIToken();
 
+      document.getElementById("homePage").style.display = "none";
+      document.getElementById("footer").style.display = "none";
+      document.getElementById("viewerPage").style.display = "block";
+      document.getElementById("viewerTitle").textContent = reportInfo.title;
 
-    powerbi.reset(
-        container
-    );
+      const models = window["powerbi-client"].models;
 
+      const config = {
+        type: "report",
+        tokenType: models.TokenType.Aad,
+        accessToken: token,
+        embedUrl: reportInfo.embedUrl,
+        id: reportInfo.id,
 
-    const report =
-        powerbi.embed(
-            container,
-            config
-        );
+        settings: {
+          // ✅ Hide all built-in panes/bars that can create "extra UI"
+          panes: {
+            filters: { visible: false },
+            pageNavigation: { visible: false },
 
-
-    report.on(
-        "loaded",
-        function () {
-
-            console.log(
-                "Power BI report loaded"
-            );
-
+            // ✅ Helps remove embedded navigation surface where supported
+            navigation: { visible: false }
+          },
+          bars: {
+            actionBar: { visible: false }
+          }
         }
-    );
+      };
 
+      const container = document.getElementById("reportContainer");
+      powerbi.reset(container);
 
-    report.on(
-        "error",
-        function (event) {
+      const report = powerbi.embed(container, config);
 
-            console.error(
-                event.detail
-            );
+      report.on("loaded", function () {
+        console.log("Power BI report loaded");
+      });
 
-        }
-    );
+      report.on("error", function (event) {
+        console.error(event.detail);
+      });
 
+      window.scrollTo(0, 0);
+    }
 
-    window.scrollTo(
-        0,
-        0
-    );
+    function goHome() {
+      const container = document.getElementById("reportContainer");
+      powerbi.reset(container);
 
-}
+      document.getElementById("viewerPage").style.display = "none";
+      document.getElementById("homePage").style.display = "block";
+      document.getElementById("footer").style.display = "block";
 
-
-
-function goHome() {
-
-
-    const container =
-        document.getElementById(
-            "reportContainer"
-        );
-
-
-    powerbi.reset(
-        container
-    );
-
-
-    document
-        .getElementById(
-            "viewerPage"
-        )
-        .style.display =
-        "none";
-
-
-    document
-        .getElementById(
-            "homePage"
-        )
-        .style.display =
-        "block";
-
-
-    document
-        .getElementById(
-            "footer"
-        )
-        .style.display =
-        "block";
-
-
-    window.scrollTo(
-        0,
-        0
-    );
-
-}
-
-</script>
-
+      window.scrollTo(0, 0);
+    }
+  </script>
 
 </body>
-
 </html>
