@@ -7,10 +7,12 @@
   <title>TQM Analytics Hub | ABK</title>
 
   <style>
+
     :root {
       --abk-blue: #005B8E;
       --abk-dark-blue: #00456D;
       --abk-yellow: #FFC000;
+      --tqm-green: #00843D;
       --page-bg: #F4F7FA;
       --text: #4B5563;
       --white: #FFFFFF;
@@ -43,16 +45,23 @@
       font-weight: 600;
     }
 
-    /* HEADER */
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
 
     .header {
       background: var(--white);
       border-bottom: 5px solid var(--abk-yellow);
+
       padding: 18px 6%;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 24px;
+
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
     }
 
@@ -72,13 +81,21 @@
       display: block;
     }
 
-    /* HOME */
+
+    /* =====================================================
+       HOME PAGE
+    ===================================================== */
 
     .container {
       width: 90%;
       max-width: 1250px;
       margin: 40px auto 50px;
     }
+
+
+    /* =====================================================
+       WELCOME SECTION
+    ===================================================== */
 
     .welcome {
       text-align: center;
@@ -94,27 +111,79 @@
       color: #6B7280;
     }
 
+
+    /* NEW MONTHLY UPDATE MESSAGE */
+
+    .update-note {
+
+      margin: 16px auto 0;
+
+      max-width: 1000px;
+
+      color: var(--tqm-green) !important;
+
+      font-family: "Tw Cen MT", Arial, sans-serif;
+
+      font-size: 12pt;
+
+      font-weight: bold;
+
+      line-height: 1.5;
+
+      padding: 10px 18px;
+
+      background: #F0F9F4;
+
+      border-radius: 8px;
+
+      border-left: 5px solid var(--tqm-green);
+
+      border-right: 5px solid var(--tqm-green);
+    }
+
+
+    /* =====================================================
+       DASHBOARD GRID
+    ===================================================== */
+
     .dashboard-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 24px;
     }
 
+
+    /* =====================================================
+       DASHBOARD CARDS
+    ===================================================== */
+
     .dashboard-card {
+
       background: var(--white);
+
       min-height: 220px;
+
       padding: 28px;
+
       border-radius: 14px;
+
       border-top: 5px solid var(--abk-yellow);
+
       box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .dashboard-card:hover {
+
       transform: translateY(-3px);
+
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
     }
 
@@ -123,162 +192,299 @@
     }
 
     .dashboard-card h3 {
+
       color: var(--abk-blue);
+
       margin-bottom: 12px;
     }
 
     .dashboard-card p {
+
       color: #6B7280;
+
       line-height: 1.5;
+
       margin-bottom: 22px;
     }
 
+
+    /* =====================================================
+       DASHBOARD BUTTON
+    ===================================================== */
+
     .dashboard-button {
+
       width: 100%;
+
       border: none;
+
       border-radius: 8px;
+
       padding: 13px 18px;
+
       background: var(--abk-blue);
+
       color: var(--white);
+
       cursor: pointer;
+
       font-family: "Tw Cen MT", Arial, sans-serif;
+
       font-size: 12pt;
+
       font-weight: 600;
+
       transition: background 0.2s ease;
     }
 
     .dashboard-button:hover {
+
       background: var(--abk-dark-blue);
     }
 
-    /* VIEWER */
+
+    /* =====================================================
+       POWER BI VIEWER
+    ===================================================== */
 
     #viewerPage {
+
       display: none;
+
       position: fixed;
+
       inset: 0;
+
       width: 100vw;
+
       height: 100vh;
+
       background: var(--white);
+
       z-index: 9999;
     }
 
+
+    /* =====================================================
+       VIEWER TOOLBAR
+    ===================================================== */
+
     .viewer-toolbar {
+
       height: 68px;
+
       background: var(--white);
+
       border-bottom: 5px solid var(--abk-yellow);
+
       display: grid;
+
       grid-template-columns: 220px 1fr 220px;
+
       align-items: center;
+
       padding: 0 18px;
+
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+
       position: relative;
+
       z-index: 10000;
     }
 
+
+    /* BACK BUTTON */
+
     .back-button {
+
       justify-self: start;
+
       border: none;
+
       border-radius: 7px;
+
       padding: 10px 16px;
+
       background: var(--abk-blue);
+
       color: var(--white);
+
       cursor: pointer;
+
       font-family: "Tw Cen MT", Arial, sans-serif;
+
       font-size: 12pt;
+
       font-weight: 600;
     }
 
     .back-button:hover {
+
       background: var(--abk-dark-blue);
     }
 
+
+    /* VIEWER TITLE */
+
     #viewerTitle {
+
       justify-self: center;
+
       color: var(--abk-blue);
+
       font-size: 18pt;
+
       font-weight: 600;
+
       text-align: center;
     }
 
+
+    /* VIEWER LOGO */
+
     .viewer-logo {
+
       justify-self: end;
+
       height: 46px;
+
       width: auto;
+
       object-fit: contain;
     }
 
+
+    /* =====================================================
+       POWER BI REPORT CONTAINER
+    ===================================================== */
+
     #reportContainer {
+
       position: absolute;
+
       top: 68px;
+
       left: 0;
+
       width: 100%;
+
       height: calc(100vh - 68px);
+
       background: var(--white);
+
       overflow: hidden;
     }
 
     #reportContainer iframe {
+
       width: 100%;
+
       height: 100%;
+
       border: 0;
+
       display: block;
     }
 
-    /* FOOTER */
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
     footer {
+
       margin-top: 60px;
+
       padding: 18px;
+
       background: var(--abk-blue);
+
       color: var(--white);
+
       text-align: center;
+
       border-top: 5px solid var(--abk-yellow);
     }
 
-    /* MOBILE */
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
 
     @media (max-width: 800px) {
+
       .dashboard-grid {
+
         grid-template-columns: 1fr;
       }
 
       .dashboard-card.featured {
+
         grid-column: auto;
       }
 
       .header {
+
         padding: 15px 5%;
       }
 
       .abk-logo {
+
         height: 50px;
       }
 
       .viewer-toolbar {
+
         grid-template-columns: auto 1fr auto;
+
         padding: 0 10px;
       }
 
       #viewerTitle {
+
         display: none;
       }
 
       .viewer-logo {
+
         height: 36px;
       }
+
+      .update-note {
+
+        font-size: 11pt;
+
+        padding: 10px 14px;
+      }
+
     }
+
   </style>
+
 </head>
 
+
 <body>
+
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
   <header class="header" id="mainHeader">
 
     <div class="header-text">
-      <h1>TQM Analytics Hub</h1>
-      <p>Quality & Performance Management Dashboard Portal</p>
+
+      <h1>
+        TQM Analytics Hub
+      </h1>
+
+      <p>
+        Quality & Performance Management Dashboard Portal
+      </p>
+
     </div>
+
 
     <img
       src="abk-logo.png"
@@ -289,13 +495,44 @@
   </header>
 
 
+
+  <!-- =====================================================
+       HOME PAGE
+  ====================================================== -->
+
   <main class="container" id="homePage">
 
+
+    <!-- WELCOME -->
+
     <section class="welcome">
-      <h2>Management Dashboards</h2>
-      <p>Select a dashboard to view detailed performance information.</p>
+
+      <h2>
+        Management Dashboards
+      </h2>
+
+      <p>
+        Select a dashboard to view detailed performance information.
+      </p>
+
+
+      <!-- MONTHLY UPDATE MESSAGE -->
+
+      <p class="update-note">
+
+        Latest available information, updated at the end of each month
+        and published by the 15th of the following month, including
+        TQM insights, qualitative and quantitative analysis.
+
+      </p>
+
     </section>
 
+
+
+    <!-- =====================================================
+         DASHBOARD CARDS
+    ====================================================== -->
 
     <div class="dashboard-grid">
 
@@ -305,21 +542,29 @@
       <div class="dashboard-card featured">
 
         <div>
-          <h3>Quality Visits Dashboard</h3>
+
+          <h3>
+            Quality Visits Dashboard
+          </h3>
 
           <p>
             Monitor quality visits, non-conformities,
             branch performance and quality assessment results.
           </p>
+
         </div>
+
 
         <button
           class="dashboard-button"
           onclick="openReport('quality')">
+
           View Dashboard
+
         </button>
 
       </div>
+
 
 
       <!-- IT -->
@@ -327,21 +572,29 @@
       <div class="dashboard-card">
 
         <div>
-          <h3>IT KPIs Dashboard</h3>
+
+          <h3>
+            IT KPIs Dashboard
+          </h3>
 
           <p>
             Monitor IT tickets, SLA performance,
             closure rates and technology KPIs.
           </p>
+
         </div>
+
 
         <button
           class="dashboard-button"
           onclick="openReport('it')">
+
           View Dashboard
+
         </button>
 
       </div>
+
 
 
       <!-- OPERATIONS -->
@@ -349,21 +602,29 @@
       <div class="dashboard-card">
 
         <div>
-          <h3>Operations KPIs Dashboard</h3>
+
+          <h3>
+            Operations KPIs Dashboard
+          </h3>
 
           <p>
             Review operations tickets, SLA results
             and operational performance indicators.
           </p>
+
         </div>
+
 
         <button
           class="dashboard-button"
           onclick="openReport('ops')">
+
           View Dashboard
+
         </button>
 
       </div>
+
 
 
       <!-- ADMIN -->
@@ -371,21 +632,29 @@
       <div class="dashboard-card">
 
         <div>
-          <h3>Admin KPIs Dashboard</h3>
+
+          <h3>
+            Admin KPIs Dashboard
+          </h3>
 
           <p>
             Track Administration tickets,
             service delivery, SLA performance and KPIs.
           </p>
+
         </div>
+
 
         <button
           class="dashboard-button"
           onclick="openReport('admin')">
+
           View Dashboard
+
         </button>
 
       </div>
+
 
 
       <!-- INCIDENTS -->
@@ -393,18 +662,25 @@
       <div class="dashboard-card">
 
         <div>
-          <h3>COO Area Incidents Dashboard</h3>
+
+          <h3>
+            COO Area Incidents Dashboard
+          </h3>
 
           <p>
             Monitor incidents, root causes,
             severity, trends and corrective actions.
           </p>
+
         </div>
+
 
         <button
           class="dashboard-button"
           onclick="openReport('incidents')">
+
           View Dashboard
+
         </button>
 
       </div>
@@ -415,21 +691,32 @@
   </main>
 
 
-  <!-- POWER BI VIEWER -->
+
+  <!-- =====================================================
+       POWER BI VIEWER
+  ====================================================== -->
 
   <section id="viewerPage">
 
+
     <div class="viewer-toolbar">
+
 
       <button
         class="back-button"
         onclick="goHome()">
+
         ← Dashboard Hub
+
       </button>
 
+
       <div id="viewerTitle">
+
         Dashboard
+
       </div>
+
 
       <img
         src="abk-logo.png"
@@ -437,13 +724,20 @@
         class="viewer-logo"
       />
 
+
     </div>
 
 
     <div id="reportContainer"></div>
 
+
   </section>
 
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <footer id="footer">
 
@@ -454,81 +748,135 @@
   </footer>
 
 
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
   <script>
+
+
+    /* =====================================================
+       POWER BI REPORTS
+    ====================================================== */
 
     const reports = {
 
+
+      /* QUALITY VISITS */
 
       quality: {
 
         title: "Quality Visits Dashboard",
 
         embedUrl:
+
           "https://app.powerbi.com/reportEmbed" +
+
           "?reportId=a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99" +
+
           "&autoAuth=true" +
+
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+
           "&filterPaneEnabled=false" +
+
           "&navContentPaneEnabled=true"
 
       },
 
+
+
+      /* IT KPIs */
 
       it: {
 
         title: "IT KPIs Dashboard",
 
         embedUrl:
+
           "https://app.powerbi.com/reportEmbed" +
+
           "?reportId=6d7d73ee-36e2-447a-850f-7a940ec52bb2" +
+
           "&autoAuth=true" +
+
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+
           "&filterPaneEnabled=false" +
+
           "&navContentPaneEnabled=true"
 
       },
 
+
+
+      /* OPERATIONS */
 
       ops: {
 
         title: "Operations KPIs Dashboard",
 
         embedUrl:
+
           "https://app.powerbi.com/reportEmbed" +
+
           "?reportId=4d6d3f56-578d-4ae9-8794-50e3c88b739f" +
+
           "&autoAuth=true" +
+
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+
           "&filterPaneEnabled=false" +
+
           "&navContentPaneEnabled=true"
 
       },
 
+
+
+      /* ADMIN */
 
       admin: {
 
         title: "Admin KPIs Dashboard",
 
         embedUrl:
+
           "https://app.powerbi.com/reportEmbed" +
+
           "?reportId=c3a3c7b7-7600-47fe-b675-9aad74e24e9d" +
+
           "&autoAuth=true" +
+
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+
           "&filterPaneEnabled=false" +
+
           "&navContentPaneEnabled=true"
 
       },
 
+
+
+      /* COO AREA INCIDENTS */
 
       incidents: {
 
         title: "COO Area Incidents Dashboard",
 
         embedUrl:
+
           "https://app.powerbi.com/reportEmbed" +
+
           "?reportId=14f20afc-1d09-4fc1-bd6c-0e7b41ed69de" +
+
           "&autoAuth=true" +
+
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+
           "&filterPaneEnabled=false" +
+
           "&navContentPaneEnabled=true"
 
       }
@@ -536,53 +884,100 @@
     };
 
 
+
+    /* =====================================================
+       OPEN DASHBOARD
+    ====================================================== */
+
     function openReport(reportKey) {
+
 
       const reportInfo = reports[reportKey];
 
+
       if (!reportInfo) {
+
         alert("Dashboard configuration was not found.");
+
         return;
+
       }
 
 
+      /* Hide main hub */
+
       document.getElementById("mainHeader").style.display = "none";
+
       document.getElementById("homePage").style.display = "none";
+
       document.getElementById("footer").style.display = "none";
 
+
+      /* Show viewer */
+
       document.getElementById("viewerPage").style.display = "block";
+
+
+      /* Set dashboard title */
 
       document.getElementById("viewerTitle").textContent =
         reportInfo.title;
 
+
+      /* Load Power BI */
 
       const container =
         document.getElementById("reportContainer");
 
 
       container.innerHTML = `
+
         <iframe
+
           src="${reportInfo.embedUrl}"
+
           title="${reportInfo.title}"
+
           allowfullscreen="true"
+
           allow="fullscreen"
+
           loading="eager">
+
         </iframe>
+
       `;
 
 
+      /* Prevent background scrolling */
+
       document.body.style.overflow = "hidden";
+
 
       window.scrollTo(0, 0);
 
     }
 
 
+
+    /* =====================================================
+       RETURN TO DASHBOARD HUB
+    ====================================================== */
+
     function goHome() {
+
+
+      /* Remove Power BI iframe */
 
       document.getElementById("reportContainer").innerHTML = "";
 
+
+      /* Hide viewer */
+
       document.getElementById("viewerPage").style.display = "none";
+
+
+      /* Restore Hub */
 
       document.getElementById("mainHeader").style.display = "flex";
 
@@ -590,29 +985,46 @@
 
       document.getElementById("footer").style.display = "block";
 
+
+      /* Restore scrolling */
+
       document.body.style.overflow = "auto";
+
 
       window.scrollTo(0, 0);
 
     }
 
 
+
+    /* =====================================================
+       ESC KEY RETURNS TO HUB
+    ====================================================== */
+
     document.addEventListener("keydown", function(event) {
 
+
       if (event.key === "Escape") {
+
 
         const viewer =
           document.getElementById("viewerPage");
 
+
         if (viewer.style.display === "block") {
+
           goHome();
+
         }
 
       }
 
     });
 
+
   </script>
 
+
 </body>
+
 </html>
