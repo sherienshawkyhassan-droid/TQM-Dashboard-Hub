@@ -14,7 +14,6 @@
       --page-bg: #F4F7FA;
       --text: #4B5563;
       --white: #FFFFFF;
-      --border: #E5E7EB;
     }
 
     * {
@@ -44,9 +43,7 @@
       font-weight: 600;
     }
 
-    /* =========================
-       HEADER
-    ========================== */
+    /* HEADER */
 
     .header {
       background: var(--white);
@@ -75,9 +72,7 @@
       display: block;
     }
 
-    /* =========================
-       HOME
-    ========================== */
+    /* HOME */
 
     .container {
       width: 90%;
@@ -156,9 +151,7 @@
       background: var(--abk-dark-blue);
     }
 
-    /* =========================
-       VIEWER
-    ========================== */
+    /* VIEWER */
 
     #viewerPage {
       display: none;
@@ -232,9 +225,7 @@
       display: block;
     }
 
-    /* =========================
-       FOOTER
-    ========================== */
+    /* FOOTER */
 
     footer {
       margin-top: 60px;
@@ -245,9 +236,7 @@
       border-top: 5px solid var(--abk-yellow);
     }
 
-    /* =========================
-       MOBILE
-    ========================== */
+    /* MOBILE */
 
     @media (max-width: 800px) {
       .dashboard-grid {
@@ -285,6 +274,7 @@
 <body>
 
   <header class="header" id="mainHeader">
+
     <div class="header-text">
       <h1>TQM Analytics Hub</h1>
       <p>Quality & Performance Management Dashboard Portal</p>
@@ -295,7 +285,9 @@
       alt="ABK Logo"
       class="abk-logo"
     />
+
   </header>
+
 
   <main class="container" id="homePage">
 
@@ -304,14 +296,20 @@
       <p>Select a dashboard to view detailed performance information.</p>
     </section>
 
+
     <div class="dashboard-grid">
 
+
+      <!-- QUALITY VISITS -->
+
       <div class="dashboard-card featured">
+
         <div>
           <h3>Quality Visits Dashboard</h3>
+
           <p>
-            Monitor quality visits, non-conformities, branch performance
-            and quality assessment results.
+            Monitor quality visits, non-conformities,
+            branch performance and quality assessment results.
           </p>
         </div>
 
@@ -320,14 +318,20 @@
           onclick="openReport('quality')">
           View Dashboard
         </button>
+
       </div>
 
+
+      <!-- IT -->
+
       <div class="dashboard-card">
+
         <div>
           <h3>IT KPIs Dashboard</h3>
+
           <p>
-            Monitor IT tickets, SLA performance, closure rates
-            and technology KPIs.
+            Monitor IT tickets, SLA performance,
+            closure rates and technology KPIs.
           </p>
         </div>
 
@@ -336,11 +340,17 @@
           onclick="openReport('it')">
           View Dashboard
         </button>
+
       </div>
 
+
+      <!-- OPERATIONS -->
+
       <div class="dashboard-card">
+
         <div>
           <h3>Operations KPIs Dashboard</h3>
+
           <p>
             Review operations tickets, SLA results
             and operational performance indicators.
@@ -352,14 +362,20 @@
           onclick="openReport('ops')">
           View Dashboard
         </button>
+
       </div>
 
+
+      <!-- ADMIN -->
+
       <div class="dashboard-card">
+
         <div>
           <h3>Admin KPIs Dashboard</h3>
+
           <p>
-            Track Administration tickets, service delivery,
-            SLA performance and KPIs.
+            Track Administration tickets,
+            service delivery, SLA performance and KPIs.
           </p>
         </div>
 
@@ -368,14 +384,20 @@
           onclick="openReport('admin')">
           View Dashboard
         </button>
+
       </div>
 
+
+      <!-- INCIDENTS -->
+
       <div class="dashboard-card">
+
         <div>
           <h3>COO Area Incidents Dashboard</h3>
+
           <p>
-            Monitor incidents, root causes, severity,
-            trends and corrective actions.
+            Monitor incidents, root causes,
+            severity, trends and corrective actions.
           </p>
         </div>
 
@@ -384,10 +406,16 @@
           onclick="openReport('incidents')">
           View Dashboard
         </button>
+
       </div>
 
+
     </div>
+
   </main>
+
+
+  <!-- POWER BI VIEWER -->
 
   <section id="viewerPage">
 
@@ -399,7 +427,9 @@
         ← Dashboard Hub
       </button>
 
-      <div id="viewerTitle">Dashboard</div>
+      <div id="viewerTitle">
+        Dashboard
+      </div>
 
       <img
         src="abk-logo.png"
@@ -409,75 +439,102 @@
 
     </div>
 
+
     <div id="reportContainer"></div>
 
   </section>
 
+
   <footer id="footer">
+
     Total Quality Management |
     Performance Monitoring & Analytics |
     Al Ahli Bank of Kuwait – Egypt
+
   </footer>
 
+
   <script>
+
     const reports = {
 
+
       quality: {
+
         title: "Quality Visits Dashboard",
+
         embedUrl:
           "https://app.powerbi.com/reportEmbed" +
           "?reportId=a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99" +
           "&autoAuth=true" +
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
           "&filterPaneEnabled=false" +
-          "&navContentPaneEnabled=false"
+          "&navContentPaneEnabled=true"
+
       },
 
+
       it: {
+
         title: "IT KPIs Dashboard",
+
         embedUrl:
           "https://app.powerbi.com/reportEmbed" +
           "?reportId=6d7d73ee-36e2-447a-850f-7a940ec52bb2" +
           "&autoAuth=true" +
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
           "&filterPaneEnabled=false" +
-          "&navContentPaneEnabled=false"
+          "&navContentPaneEnabled=true"
+
       },
 
+
       ops: {
+
         title: "Operations KPIs Dashboard",
+
         embedUrl:
           "https://app.powerbi.com/reportEmbed" +
           "?reportId=4d6d3f56-578d-4ae9-8794-50e3c88b739f" +
           "&autoAuth=true" +
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
           "&filterPaneEnabled=false" +
-          "&navContentPaneEnabled=false"
+          "&navContentPaneEnabled=true"
+
       },
 
+
       admin: {
+
         title: "Admin KPIs Dashboard",
+
         embedUrl:
           "https://app.powerbi.com/reportEmbed" +
           "?reportId=c3a3c7b7-7600-47fe-b675-9aad74e24e9d" +
           "&autoAuth=true" +
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
           "&filterPaneEnabled=false" +
-          "&navContentPaneEnabled=false"
+          "&navContentPaneEnabled=true"
+
       },
 
+
       incidents: {
+
         title: "COO Area Incidents Dashboard",
+
         embedUrl:
           "https://app.powerbi.com/reportEmbed" +
           "?reportId=14f20afc-1d09-4fc1-bd6c-0e7b41ed69de" +
           "&autoAuth=true" +
           "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
           "&filterPaneEnabled=false" +
-          "&navContentPaneEnabled=false"
+          "&navContentPaneEnabled=true"
+
       }
 
     };
+
 
     function openReport(reportKey) {
 
@@ -488,16 +545,20 @@
         return;
       }
 
+
       document.getElementById("mainHeader").style.display = "none";
       document.getElementById("homePage").style.display = "none";
       document.getElementById("footer").style.display = "none";
+
       document.getElementById("viewerPage").style.display = "block";
 
       document.getElementById("viewerTitle").textContent =
         reportInfo.title;
 
+
       const container =
         document.getElementById("reportContainer");
+
 
       container.innerHTML = `
         <iframe
@@ -509,32 +570,48 @@
         </iframe>
       `;
 
+
       document.body.style.overflow = "hidden";
+
       window.scrollTo(0, 0);
+
     }
+
 
     function goHome() {
 
       document.getElementById("reportContainer").innerHTML = "";
 
       document.getElementById("viewerPage").style.display = "none";
+
       document.getElementById("mainHeader").style.display = "flex";
+
       document.getElementById("homePage").style.display = "block";
+
       document.getElementById("footer").style.display = "block";
 
       document.body.style.overflow = "auto";
+
       window.scrollTo(0, 0);
+
     }
 
-    document.addEventListener("keydown", function (event) {
+
+    document.addEventListener("keydown", function(event) {
+
       if (event.key === "Escape") {
-        const viewer = document.getElementById("viewerPage");
+
+        const viewer =
+          document.getElementById("viewerPage");
 
         if (viewer.style.display === "block") {
           goHome();
         }
+
       }
+
     });
+
   </script>
 
 </body>
