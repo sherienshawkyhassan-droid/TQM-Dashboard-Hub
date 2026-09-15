@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TQM Analytics Hub | ABK</title>
+
+  <style>
+    :root {
+      --abk-blue: #005B8E;
+      --abk-dark-blue: #00456D;
+      --abk-yellow: #FFC000;
+      --tqm-green: #00843D;
+      --rag-green: #16A34A;
+      --rag-amber: #F59E0B;
+      --rag-red: #DC2626;
+      --page-bg: #F4F7FA;
+      --text: #4B5563;
+      --white: #FFFFFF;
+      --border: #D9E6EF;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100%; }
+
+    body {
+      font-family: "Tw Cen MT", Arial, sans-serif;
+      font-size: 12pt;
+      background: var(--page-bg);
+      color: var(--text);
+    }
+
+    h1, h2, h3 {
+      font-family: "Tw Cen MT", Arial, sans-serif;
+      font-size: 18pt;
+      font-weight: 600;
+    }
+
+    .header {
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      background: var(--white);
+      border-bottom: 5px solid var(--abk-yellow);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      min-width: 0;
+    }
+
+    .header-text h1 { color: var(--abk-blue); margin-bottom: 5px; }
+    .header-text .header-subtitle { color: #666; }
+
+    .hub-slogan {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--abk-dark-blue);
+      font-size: 13pt;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+
+    .hub-slogan::before {
+      content: "";
+      width: 30px;
+      height: 4px;
+      flex: 0 0 auto;
+      background: var(--abk-yellow);
+      border-radius: 999px;
+    }
+
+    .hub-illustration {
+      width: 112px;
+      height: 78px;
+      flex: 0 0 auto;
+      padding: 8px;
+      color: var(--abk-blue);
+      background: linear-gradient(145deg, #F4FAFD, #E3F2F8);
+      border: 1px solid #C8E0EC;
+      border-radius: 20px;
+      box-shadow: 0 6px 14px rgba(0, 91, 142, .10);
+      animation: hubFloat 3.5s ease-in-out infinite;
+    }
+
+    .hub-illustration svg { width: 100%; height: 100%; display: block; }
+
+    .hub-illustration .trend-line {
+      stroke: var(--abk-yellow);
+      stroke-dasharray: 70;
+      stroke-dashoffset: 70;
+      animation: drawTrend 2.8s ease-in-out infinite;
+    }
+
+    .hub-illustration .quality-check {
+      stroke: var(--tqm-green);
+      transform-origin: center;
+      animation: checkPulse 2.8s ease-in-out infinite;
+    }
+
+    @keyframes hubFloat {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-5px) rotate(1deg); }
+    }
+
+    @keyframes drawTrend {
+      0% { stroke-dashoffset: 70; opacity: .35; }
+      45%, 80% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: -70; opacity: .35; }
+    }
+
+    @keyframes checkPulse {
+      0%, 100% { transform: scale(.94); opacity: .75; }
+      50% { transform: scale(1.06); opacity: 1; }
+    }
+
+
+    .abk-logo {
+      height: 70px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1250px;
+      margin: 40px auto 50px;
+    }
+
+    .welcome { text-align: center; margin-bottom: 36px; }
+    .welcome h2 { color: var(--abk-blue); margin-bottom: 10px; }
+    .welcome p { color: #6B7280; }
+
+    .update-note {
+      max-width: 820px;
+      margin: 12px auto 0;
+      padding: 7px 14px;
+      color: var(--tqm-green) !important;
+      font-size: 10.5pt;
+      font-weight: bold;
+      line-height: 1.35;
+      background: #F0F9F4;
+      border-left: 3px solid var(--tqm-green);
+      border-right: 3px solid var(--tqm-green);
+      border-radius: 7px;
+    }
+
+    /* =====================================================
+       EXECUTIVE KPI SCORECARD
+    ===================================================== */
+    .scorecard-section {
+      margin-bottom: 34px;
+      padding: 28px;
+      background: var(--white);
+      border-top: 5px solid var(--abk-yellow);
+      border-radius: 14px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .scorecard-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scorecard-header h2 { color: var(--abk-blue); margin-bottom: 6px; }
+    .scorecard-header p { color: #6B7280; }
+
+    .period-badge {
+      flex: 0 0 auto;
+      padding: 8px 14px;
+      color: var(--abk-dark-blue);
+      font-size: 11pt;
+      font-weight: 600;
+      background: #EAF4F9;
+      border: 1px solid #C8E0EC;
+      border-radius: 999px;
+    }
+
+    .scorecard-tabs {
+      display: flex;
+      gap: 9px;
+      margin: 20px 0;
+      padding-bottom: 4px;
+      overflow-x: auto;
+    }
+
+    .threshold-legend {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .threshold-item {
+      padding: 12px 14px;
+      color: #4B5563;
+      font-size: 10.5pt;
+      line-height: 1.4;
+      background: #FAFCFD;
+      border: 1px solid #E1EBF1;
+      border-left: 5px solid var(--threshold-colour);
+      border-radius: 8px;
+    }
+
+    .threshold-item strong {
+      display: block;
+      margin-bottom: 3px;
+      color: #374151;
+    }
+
+    .scorecard-tab {
+      flex: 0 0 auto;
+      padding: 10px 16px;
+      color: var(--abk-blue);
+      font-weight: 600;
+      background: #EDF6FA;
+      border: 1px solid #C8E0EC;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .scorecard-tab:hover,
+    .scorecard-tab.active {
+      color: var(--white);
+      background: var(--abk-blue);
+      border-color: var(--abk-blue);
+    }
+
+    .scorecard-title {
+      margin-bottom: 16px;
+      color: var(--abk-dark-blue);
+      font-size: 15pt;
+    }
+
+    .gauge-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+      gap: 16px;
+    }
+
+    .metric-section-title {
+      margin: 22px 0 12px;
+      color: var(--abk-dark-blue);
+      font-size: 12.5pt;
+    }
+
+    .metric-section-title:first-child { margin-top: 0; }
+
+    .information-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .information-card {
+      position: relative;
+      min-height: 105px;
+      padding: 10px 10px 8px;
+      overflow: hidden;
+      text-align: center;
+      background: linear-gradient(145deg, #F8FCFE 0%, #EAF5FA 100%);
+      border: 1px solid #CFE3EE;
+      border-top: 4px solid var(--abk-blue);
+      border-radius: 11px;
+    }
+
+    .information-card::after {
+      content: "";
+      position: absolute;
+      right: -28px;
+      bottom: -38px;
+      width: 105px;
+      height: 105px;
+      background: rgba(0, 91, 142, 0.07);
+      border-radius: 50%;
+      animation: infoPulse 3s ease-in-out infinite;
+    }
+
+    .information-symbol {
+      width: 27px;
+      height: 27px;
+      margin: 0 auto 5px;
+      color: var(--abk-blue);
+      animation: iconFloat 2.8s ease-in-out infinite;
+    }
+
+    .information-symbol svg { width: 100%; height: 100%; }
+
+    .information-value {
+      position: relative;
+      z-index: 1;
+      color: var(--abk-dark-blue);
+      font-size: 18pt;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .information-name {
+      position: relative;
+      z-index: 1;
+      min-height: 34px;
+      margin-top: 5px;
+      color: #FFC000;
+      font-size: 10pt;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .gauge-card {
+      --gauge-colour: var(--abk-blue);
+      min-width: 0;
+      padding: 14px 9px;
+      text-align: center;
+      background: #FAFCFD;
+      border: 1px solid #E1EBF1;
+      border-radius: 11px;
+    }
+
+    .gauge-card svg {
+      display: block;
+      width: 100%;
+      max-width: 190px;
+      margin: 0 auto;
+    }
+
+    .gauge-track,
+    .gauge-progress {
+      fill: none;
+      stroke-width: 19;
+      stroke-linecap: round;
+    }
+
+    .gauge-track { stroke: #E5EDF2; }
+    .gauge-progress { stroke: var(--gauge-colour); }
+
+    .gauge-value {
+      fill: var(--abk-dark-blue);
+      font-size: 25px;
+      font-weight: 700;
+    }
+
+    .gauge-scale { fill: #7B8B97; font-size: 9px; }
+
+    .gauge-name {
+      min-height: 42px;
+      margin-top: -2px;
+      color: #374151;
+      font-size: 11pt;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .gauge-target {
+      margin-top: 5px;
+      color: #6B7280;
+      font-size: 9.5pt;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 5px;
+      background: var(--gauge-colour);
+      border-radius: 50%;
+    }
+
+    .kpi-message {
+      padding: 16px;
+      color: #6B5200;
+      line-height: 1.5;
+      background: #FFF8DC;
+      border: 1px solid #F2DB82;
+      border-radius: 9px;
+    }
+
+    .kpi-message code { color: var(--abk-dark-blue); font-weight: 600; }
+
+    /* =====================================================
+       DASHBOARD CARDS
+    ===================================================== */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .dashboard-card {
+      min-height: 285px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--white);
+      border-top: 5px solid var(--abk-yellow);
+      border-radius: 14px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .dashboard-card.featured { grid-column: auto; }
+    .dashboard-card h3 { color: var(--abk-blue); margin-bottom: 10px; font-size: 15pt; }
+
+    .dashboard-card p {
+      color: #6B7280;
+      line-height: 1.5;
+      margin-bottom: 16px;
+      font-size: 10.5pt;
+    }
+
+    .dashboard-visual {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 14px;
+      padding: 12px;
+      color: var(--abk-blue);
+      background: #EDF6FA;
+      border-radius: 18px;
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+
+    .dashboard-card:nth-child(2) .dashboard-visual { animation-delay: .25s; }
+    .dashboard-card:nth-child(3) .dashboard-visual { animation-delay: .5s; }
+    .dashboard-card:nth-child(4) .dashboard-visual { animation-delay: .75s; }
+    .dashboard-card:nth-child(5) .dashboard-visual { animation-delay: 1s; }
+    .dashboard-visual svg { width: 100%; height: 100%; display: block; }
+    .dashboard-visual .accent { color: var(--abk-yellow); }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    @keyframes infoPulse {
+      0%, 100% { transform: scale(.92); opacity: .6; }
+      50% { transform: scale(1.08); opacity: 1; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dashboard-visual,
+      .information-symbol,
+      .information-card::after,
+      .hub-illustration,
+      .hub-illustration .trend-line,
+      .hub-illustration .quality-check { animation: none; }
+    }
+
+    .dashboard-button {
+      width: 100%;
+      padding: 13px 18px;
+      color: var(--white);
+      font-size: 12pt;
+      font-weight: 600;
+      background: var(--abk-blue);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .dashboard-button:hover { background: var(--abk-dark-blue); }
+
+    /* =====================================================
+       POWER BI VIEWER
+    ===================================================== */
+    #viewerPage {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--white);
+      z-index: 9999;
+    }
+
+    .viewer-toolbar {
+      height: 68px;
+      padding: 0 18px;
+      display: grid;
+      grid-template-columns: 220px 1fr 220px;
+      align-items: center;
+      position: relative;
+      z-index: 10000;
+      background: var(--white);
+      border-bottom: 5px solid var(--abk-yellow);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    }
+
+    .back-button {
+      justify-self: start;
+      padding: 10px 16px;
+      color: var(--white);
+      font-size: 12pt;
+      font-weight: 600;
+      background: var(--abk-blue);
+      border: none;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+
+    .back-button:hover { background: var(--abk-dark-blue); }
+
+    #viewerTitle {
+      justify-self: center;
+      color: var(--abk-blue);
+      font-size: 18pt;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .viewer-logo {
+      justify-self: end;
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    #reportContainer {
+      position: absolute;
+      top: 68px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 68px);
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    #reportContainer iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    footer {
+      margin-top: 60px;
+      padding: 18px;
+      color: var(--white);
+      text-align: center;
+      background: var(--abk-blue);
+      border-top: 5px solid var(--abk-yellow);
+    }
+
+    @media (max-width: 1150px) {
+      .dashboard-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 800px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .dashboard-card.featured { grid-column: auto; }
+      .header { padding: 15px 5%; }
+      .header-brand { gap: 12px; }
+      .hub-illustration { width: 76px; height: 58px; padding: 6px; border-radius: 14px; }
+      .hub-slogan { font-size: 11pt; }
+      .hub-slogan::before { width: 20px; }
+      .abk-logo { height: 50px; }
+      .scorecard-section { padding: 20px 15px; }
+      .scorecard-header { flex-direction: column; }
+      .threshold-legend { grid-template-columns: 1fr; }
+      .period-badge { align-self: center; }
+      .viewer-toolbar { grid-template-columns: auto 1fr auto; padding: 0 10px; }
+      #viewerTitle { display: none; }
+      .viewer-logo { height: 36px; }
+      .update-note { font-size: 9.5pt; padding: 6px 10px; }
+    }
+
+    /* =====================================================
+       QUALITY VISITS - BRANCH RANKING COMPARISON
+    ===================================================== */
+    .branch-ranking-section {
+      margin-top: 26px;
+      padding: 14px 12px 10px;
+      background: #FFFFFF;
+      border: 2px solid var(--abk-yellow);
+      border-radius: 24px;
+      overflow-x: auto;
+    }
+    .branch-ranking-header { margin-bottom: 8px; }
+    .branch-ranking-header h4 {
+      margin-bottom: 4px;
+      color: #FFC000;
+      font-size: 13pt;
+      font-weight: 700;
+    }
+    .branch-ranking-header p { color: #4B5563; font-size: 9.5pt; font-weight: 600; }
+    .branch-ranking-legend {
+      display: flex;
+      gap: 14px;
+      margin: 9px 0 4px;
+      color: #6B7280;
+      font-size: 9.5pt;
+    }
+    .branch-ranking-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .legend-swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .legend-y25 { background: #8F898B; }
+    .legend-y26 { background: #007DBA; }
+    .branch-ranking-chart { min-width: 1040px; width: 100%; height: 245px; }
+    .branch-ranking-chart svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    @media (max-width: 800px) {
+      .branch-ranking-section { border-radius: 18px; }
+      .branch-ranking-chart { min-width: 980px; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <header class="header" id="mainHeader">
+    <div class="header-brand">
+      <div class="header-text">
+        <h1>TQM Analytics Hub</h1>
+        <p class="header-subtitle">Quality &amp; Performance Management Dashboard Portal</p>
+        <p class="hub-slogan">Data That Drives Quality</p>
+      </div>
+
+      <div class="hub-illustration" aria-label="Animated data and quality illustration" role="img">
+        <svg viewBox="0 0 110 72" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="10" y="43" width="12" height="19" rx="3" opacity=".55"></rect>
+          <rect x="30" y="33" width="12" height="29" rx="3" opacity=".72"></rect>
+          <rect x="50" y="21" width="12" height="41" rx="3"></rect>
+          <path class="trend-line" d="M10 35l24-13 19 5 22-17"></path>
+          <path class="trend-line" d="M66 10h9v9"></path>
+          <circle class="quality-check" cx="87" cy="45" r="16"></circle>
+          <path class="quality-check" d="M79 45l6 6 11-13"></path>
+        </svg>
+      </div>
+    </div>
+    <img src="abk-logo.png" alt="ABK Logo" class="abk-logo" />
+  </header>
+
+  <main class="container" id="homePage">
+    <section class="welcome">
+      <h2>Management Dashboards</h2>
+      <p>Select a dashboard to view detailed performance information.</p>
+
+      <div class="update-note">
+        <strong>Frequency:</strong> Published by the 15th of each month, covering data through the end of the preceding month.<br>
+        <strong>Coverage:</strong> TQM insights backed by comprehensive qualitative and quantitative analysis.
+      </div>
+    </section>
+
+    <section class="scorecard-section" aria-labelledby="scorecardHeading">
+      <div class="scorecard-header">
+        <div>
+          <h2 id="scorecardHeading">Executive KPI Scorecard</h2>
+          <p>Monthly performance at a glance</p>
+        </div>
+        <div class="period-badge">Reporting period: Up to August 2026</div>
+      </div>
+
+      <div class="threshold-legend" aria-label="KPI performance thresholds">
+        <div class="threshold-item" style="--threshold-colour: var(--rag-green)">
+          <strong>Green (≥ 85%)</strong>
+          Meeting or exceeding the required standards. Current practices are effective and should be maintained.
+        </div>
+        <div class="threshold-item" style="--threshold-colour: var(--rag-amber)">
+          <strong>Amber (70%–84%)</strong>
+          Acceptable but at risk. Performance should be closely monitored to prevent deterioration into the red zone.
+        </div>
+        <div class="threshold-item" style="--threshold-colour: var(--rag-red)">
+          <strong>Red (&lt; 70%)</strong>
+          Below acceptable levels. Immediate attention from the PMO Division is required.
+        </div>
+      </div>
+
+      <div class="scorecard-tabs" id="scorecardTabs" role="tablist"></div>
+      <div id="scorecardContent">
+        <div class="kpi-message">Loading KPI scorecard…</div>
+      </div>
+    </section>
+
+    <div class="dashboard-grid">
+      <div class="dashboard-card featured">
+        <div>
+          <div class="dashboard-visual" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M10 25l9 9 19-21"/><circle cx="24" cy="24" r="20" opacity=".25"/></svg>
+          </div>
+          <h3>Quality Visits Dashboard</h3>
+          <p>Monitor quality visits, non-conformities, branch performance and quality assessment results.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('quality')">View Dashboard</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <div class="dashboard-visual" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="7" y="9" width="34" height="25" rx="3"/><path d="M18 41h12M24 34v7"/><path class="accent" d="M14 26l6-7 6 5 8-10"/></svg>
+          </div>
+          <h3>IT KPIs Dashboard</h3>
+          <p>Monitor IT tickets, SLA performance, closure rates and technology KPIs.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('it')">View Dashboard</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <div class="dashboard-visual" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M8 39h32M11 39V21h8v18M20 39V12h8v27M29 39V18h8v21"/><path class="accent" d="M10 15l9-6 9 4 10-8"/></svg>
+          </div>
+          <h3>Operations KPIs Dashboard</h3>
+          <p>Review operations tickets, SLA results and operational performance indicators.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('ops')">View Dashboard</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <div class="dashboard-visual" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M10 13h28v28H10zM17 7v12M31 7v12M10 21h28"/><path class="accent" d="M17 29h5M17 35h14"/></svg>
+          </div>
+          <h3>Admin KPIs Dashboard</h3>
+          <p>Track Administration tickets, service delivery, SLA performance and KPIs.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('admin')">View Dashboard</button>
+      </div>
+
+      <div class="dashboard-card">
+        <div>
+          <div class="dashboard-visual" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M24 5l17 7v11c0 10-7 17-17 21C14 40 7 33 7 23V12z"/><path class="accent" d="M16 25l6 6 11-13"/></svg>
+          </div>
+          <h3>COO Area Incidents Dashboard</h3>
+          <p>Monitor incidents, root causes, severity, trends and corrective actions.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('incidents')">View Dashboard</button>
+      </div>
+    </div>
+  </main>
+
+  <section id="viewerPage">
+    <div class="viewer-toolbar">
+      <button class="back-button" onclick="goHome()">← Dashboard Hub</button>
+      <div id="viewerTitle">Dashboard</div>
+      <img src="abk-logo.png" alt="ABK Logo" class="viewer-logo" />
+    </div>
+    <div id="reportContainer"></div>
+  </section>
+
+  <footer id="footer">
+    Total Quality Management |
+    Performance Monitoring &amp; Analytics |
+    Al Ahli Bank of Kuwait – Egypt
+  </footer>
+
+  <script>
+    /* =====================================================
+       KPI SCORECARD
+
+       The page first looks for the recommended fixed name:
+       kpi-summary.csv
+
+       It also accepts the current uploaded filename below.
+       Both files must be placed beside index.html on GitHub.
+    ====================================================== */
+    const KPI_FILES = [
+      "kpi-summary.csv",
+      "PMO_TQM_KPIs Monitored by TQM_FNL_150926.csv"
+    ];
+
+    const BRANCH_RANKING_FILES = [
+      "quality-branch-ranking.csv",
+      "quality-branch-ranking(1).csv"
+    ];
+
+    let branchRankingData = [];
+
+    const scorecardDashboards = [
+      {
+        key: "quality",
+        title: "Quality Visits",
+        aliases: ["quality visits dashboard", "quality visits", "quality"]
+      },
+      {
+        key: "it",
+        title: "IT KPIs",
+        aliases: ["it kpis dashboard", "it kpis", "it"]
+      },
+      {
+        key: "admin",
+        title: "Administration KPIs",
+        aliases: ["admin kpis dashboard", "administration kpis dashboard", "admin kpis", "administration"]
+      },
+      {
+        key: "ops",
+        title: "Operations KPIs",
+        aliases: ["operations kpis dashboard", "operations kpis", "operations", "ops"]
+      },
+      {
+        key: "incidents",
+        title: "COO Area Incidents",
+        aliases: ["coo area incidents dashboard", "coo area incidents", "incidents dashboard", "incidents"]
+      }
+    ];
+
+    /* Small information cards: no gauge and no RAG. */
+    const INFORMATION_KPIS = new Set([
+      "% of visits conducted",
+      "total quality findings",
+      "total it tickets",
+      "total crs",
+      "total admin tickets",
+      "total valid prs",
+      "q1 till q2 total cost saving in usd",
+      "q1 till q2 total cost saving in egp",
+      "total ops tickets",
+      "total served customers",
+      "total operations division transactions",
+      "total operations division revenues",
+      "total coo area incidents",
+      "total actions for incidents"
+    ]);
+
+    /* Percentage gauges shown in ABK blue only: gauge yes, RAG no. */
+    const NON_RAG_GAUGE_KPIS = new Set([
+      "% of coo area findings out of total quality findings",
+      "high priority crs rate",
+      "% of customer impacted by sla violation",
+      "% of it owned incidents",
+      "% of admin owned incidents",
+      "% of ops owned incidents"
+    ]);
+
+    let loadedKPIs = [];
+    let activeScorecard = "quality";
+
+    function normalise(value) {
+      return String(value || "").trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    function escapeHTML(value) {
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [];
+      let cell = "";
+      let quoted = false;
+
+      for (let index = 0; index < text.length; index += 1) {
+        const character = text[index];
+        const nextCharacter = text[index + 1];
+
+        if (character === '"' && quoted && nextCharacter === '"') {
+          cell += '"';
+          index += 1;
+        } else if (character === '"') {
+          quoted = !quoted;
+        } else if (character === "," && !quoted) {
+          row.push(cell.trim());
+          cell = "";
+        } else if ((character === "\n" || character === "\r") && !quoted) {
+          if (character === "\r" && nextCharacter === "\n") index += 1;
+          row.push(cell.trim());
+          if (row.some(value => value !== "")) rows.push(row);
+          row = [];
+          cell = "";
+        } else {
+          cell += character;
+        }
+      }
+
+      row.push(cell.trim());
+      if (row.some(value => value !== "")) rows.push(row);
+      if (rows.length < 2) return [];
+
+      const headings = rows[0].map((heading, index) =>
+        (index === 0 ? heading.replace(/^\uFEFF/, "") : heading).trim()
+      );
+
+      return rows.slice(1).map(values =>
+        Object.fromEntries(headings.map((heading, index) => [heading, values[index] || ""]))
+      );
+    }
+
+    function numberFrom(value) {
+      const cleaned = String(value || "")
+        .replace(/[%,$£€\s]/g, "")
+        .replace(/,/g, "");
+      const parsed = Number(cleaned);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    function niceMaximum(value) {
+      if (value <= 0) return 100;
+      const magnitude = 10 ** Math.floor(Math.log10(value));
+      return Math.ceil((value * 1.1) / magnitude) * magnitude;
+    }
+
+    function dashboardFromName(name) {
+      const input = normalise(name);
+      return scorecardDashboards.find(dashboard => dashboard.aliases.includes(input));
+    }
+
+    function prepareKPI(row) {
+      const dashboard = dashboardFromName(row["Dashboard Name"]);
+      if (!dashboard || !row.KPI) return null;
+
+      const originalValue = String(row.Value || "").trim();
+      const isPercentage = originalValue.includes("%");
+      const normalisedKPI = normalise(row.KPI);
+      const isNonRAGGauge = NON_RAG_GAUGE_KPIS.has(normalisedKPI);
+      const isInformation = INFORMATION_KPIS.has(normalisedKPI) || (!isPercentage && !isNonRAGGauge);
+      const value = numberFrom(originalValue);
+      const maximum = isPercentage ? 100 : niceMaximum(value);
+
+      let status = "blue";
+      let target = "Information";
+
+      if (isNonRAGGauge) {
+        status = "blue";
+        target = "";
+      } else if (!isInformation && isPercentage) {
+        status = value >= 85 ? "green" : value >= 70 ? "amber" : "red";
+        target = "Required standard ≥ 85%";
+      }
+
+      return {
+        dashboardKey: dashboard.key,
+        kpi: row.KPI.trim(),
+        value,
+        originalValue,
+        isPercentage,
+        isInformation,
+        isNonRAGGauge,
+        maximum,
+        status,
+        target,
+        percentage: Math.max(0, Math.min(100, (value / maximum) * 100))
+      };
+    }
+
+    function statusColour(status) {
+      return {
+        green: "var(--rag-green)",
+        amber: "var(--rag-amber)",
+        red: "var(--rag-red)",
+        blue: "var(--abk-blue)"
+      }[status] || "var(--abk-blue)";
+    }
+
+    function compactNumber(value) {
+      return new Intl.NumberFormat("en-US", {
+        notation: value >= 1000 ? "compact" : "standard",
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+
+    function displayValue(kpi) {
+      if (kpi.isPercentage) return `${kpi.value}%`;
+      const name = normalise(kpi.kpi);
+      if (name.includes("usd")) return `$${compactNumber(kpi.value)}`;
+      if (name.includes("egp")) return `EGP ${compactNumber(kpi.value)}`;
+      return compactNumber(kpi.value);
+    }
+
+    function gaugeHTML(kpi) {
+      const maximumLabel = kpi.isPercentage ? "100" : compactNumber(kpi.maximum);
+      return `
+        <article class="gauge-card"
+                 style="--gauge-colour:${statusColour(kpi.status)}"
+                 title="Exact value: ${escapeHTML(kpi.originalValue)}">
+          <svg viewBox="0 0 200 120" role="img"
+               aria-label="${escapeHTML(kpi.kpi)}: ${escapeHTML(kpi.originalValue)}">
+            <path class="gauge-track"
+                  d="M 20 100 A 80 80 0 0 1 180 100"
+                  pathLength="100"></path>
+            <path class="gauge-progress"
+                  d="M 20 100 A 80 80 0 0 1 180 100"
+                  pathLength="100"
+                  stroke-dasharray="${kpi.percentage.toFixed(1)} 100"></path>
+            <text class="gauge-value" x="100" y="91" text-anchor="middle">
+              ${escapeHTML(displayValue(kpi))}
+            </text>
+            <text class="gauge-scale" x="18" y="116">0</text>
+            <text class="gauge-scale" x="182" y="116" text-anchor="end">${maximumLabel}</text>
+          </svg>
+          <div class="gauge-name">${escapeHTML(kpi.kpi)}</div>
+          ${kpi.target ? `<div class="gauge-target"><span class="status-dot"></span>${escapeHTML(kpi.target)}</div>` : ""}
+        </article>`;
+    }
+
+    function informationCardHTML(kpi) {
+      return `
+        <article class="information-card"
+                 title="Exact value: ${escapeHTML(kpi.originalValue)}">
+          <div class="information-symbol" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 32V22M16 32V15M25 32V19M34 32V8"></path>
+              <path d="M6 9l10 5 9-6 9-3"></path>
+            </svg>
+          </div>
+          <div class="information-value">${escapeHTML(displayValue(kpi))}</div>
+          <div class="information-name">${escapeHTML(kpi.kpi)}</div>
+        </article>`;
+    }
+
+    function renderScorecardTabs() {
+      const available = scorecardDashboards.filter(dashboard =>
+        loadedKPIs.some(kpi => kpi.dashboardKey === dashboard.key)
+      );
+
+      if (!available.some(dashboard => dashboard.key === activeScorecard)) {
+        activeScorecard = available[0]?.key || "quality";
+      }
+
+      document.getElementById("scorecardTabs").innerHTML = available.map(dashboard => `
+        <button type="button"
+                class="scorecard-tab ${dashboard.key === activeScorecard ? "active" : ""}"
+                role="tab"
+                aria-selected="${dashboard.key === activeScorecard}"
+                onclick="selectScorecard('${dashboard.key}')">
+          ${escapeHTML(dashboard.title)}
+        </button>`).join("");
+    }
+
+    async function loadBranchRanking() {
+      for (const filename of BRANCH_RANKING_FILES) {
+        try {
+          const response = await fetch(`${encodeURI(filename)}?v=${Date.now()}`, { cache: "no-store" });
+          if (!response.ok) continue;
+          const rows = parseCSV(await response.text());
+          branchRankingData = rows.map(row => ({
+            branch: String(row["Branch Name"] || "").trim(),
+            y25: numberFrom(row["Y25 Comparable Branch Rank"]),
+            y26: numberFrom(row["Y26 Comparable Branch Rank"])
+          })).filter(row => row.branch && row.y25 > 0 && row.y26 > 0);
+          return;
+        } catch (error) {
+          /* Continue to the next accepted filename. */
+        }
+      }
+      branchRankingData = [];
+    }
+
+    function branchRankingHTML() {
+      if (activeScorecard !== "quality") return "";
+      if (!branchRankingData.length) {
+        return `
+          <section class="branch-ranking-section">
+            <div class="kpi-message">
+              Upload <code>quality-branch-ranking.csv</code> beside <code>index.html</code> to display the Branches Ranking chart.
+            </div>
+          </section>`;
+      }
+
+      const maxRank = Math.max(16, ...branchRankingData.flatMap(row => [row.y25, row.y26]));
+      const width = 1120;
+      const height = 245;
+      const top = 38;
+      const bottom = 42;
+      const left = 18;
+      const right = 18;
+      const plotHeight = height - top - bottom;
+      const plotWidth = width - left - right;
+      const groupWidth = plotWidth / branchRankingData.length;
+      const barWidth = Math.min(24, groupWidth * 0.34);
+
+      const bars = branchRankingData.map((row, index) => {
+        const center = left + groupWidth * index + groupWidth / 2;
+        const y25Height = (row.y25 / maxRank) * plotHeight;
+        const y26Height = (row.y26 / maxRank) * plotHeight;
+        const baseY = top + plotHeight;
+        const x25 = center - barWidth;
+        const x26 = center;
+        const y25Y = baseY - y25Height;
+        const y26Y = baseY - y26Height;
+        return `
+          <rect x="${x25.toFixed(1)}" y="${y25Y.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${y25Height.toFixed(1)}" fill="#8F898B"></rect>
+          <rect x="${x26.toFixed(1)}" y="${y26Y.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${y26Height.toFixed(1)}" fill="#007DBA"></rect>
+          <text x="${(x25 + barWidth / 2).toFixed(1)}" y="${Math.max(12, y25Y - 7).toFixed(1)}" text-anchor="middle" font-size="10" fill="#5B5B5B">${row.y25}</text>
+          <text x="${(x26 + barWidth / 2).toFixed(1)}" y="${Math.max(12, y26Y - 7).toFixed(1)}" text-anchor="middle" font-size="10" fill="#5B5B5B">${row.y26}</text>
+          <text x="${center.toFixed(1)}" y="${(baseY + 18).toFixed(1)}" text-anchor="middle" font-size="9" fill="#5B5B5B">${escapeHTML(row.branch)}</text>`;
+      }).join("");
+
+      return `
+        <section class="branch-ranking-section" aria-label="Branches ranking comparison">
+          <div class="branch-ranking-header">
+            <h4>Branches Ranking</h4>
+            <p>Based on COO owned findings Y25 Vs. Y26</p>
+          </div>
+          <div class="branch-ranking-legend" aria-label="Chart legend">
+            <span><i class="legend-swatch legend-y25"></i>Y25 Comparable Branch Rank</span>
+            <span><i class="legend-swatch legend-y26"></i>Y26 Comparable Branch Rank</span>
+          </div>
+          <div class="branch-ranking-chart">
+            <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Y25 and Y26 comparable branch ranking grouped bar chart">
+              ${bars}
+            </svg>
+          </div>
+        </section>`;
+    }
+
+    function renderActiveScorecard() {
+      const dashboard = scorecardDashboards.find(item => item.key === activeScorecard);
+      const kpis = loadedKPIs.filter(kpi => kpi.dashboardKey === activeScorecard);
+      const informationKPIs = kpis.filter(kpi => kpi.isInformation);
+      const performanceKPIs = kpis.filter(kpi => !kpi.isInformation);
+
+      const informationSection = informationKPIs.length ? `
+        <h4 class="metric-section-title">Information KPIs</h4>
+        <div class="information-grid">${informationKPIs.map(informationCardHTML).join("")}</div>` : "";
+
+      const performanceSection = performanceKPIs.length ? `
+        <h4 class="metric-section-title">Performance KPIs</h4>
+        <div class="gauge-grid">${performanceKPIs.map(gaugeHTML).join("")}</div>` : "";
+
+      document.getElementById("scorecardContent").innerHTML = `
+        <h3 class="scorecard-title">${escapeHTML(dashboard?.title || "KPI Summary")}</h3>
+        ${informationSection}
+        ${performanceSection}
+        ${branchRankingHTML()}`;
+    }
+
+    function selectScorecard(key) {
+      activeScorecard = key;
+      renderScorecardTabs();
+      renderActiveScorecard();
+    }
+
+    async function fetchFirstAvailableCSV() {
+      for (const filename of KPI_FILES) {
+        try {
+          const response = await fetch(`${encodeURI(filename)}?v=${Date.now()}`, { cache: "no-store" });
+          if (response.ok) return await response.text();
+        } catch (error) {
+          /* Continue to the next accepted filename. */
+        }
+      }
+      throw new Error("KPI CSV not found");
+    }
+
+    async function loadKPIScorecard() {
+      try {
+        const csvText = await fetchFirstAvailableCSV();
+        await loadBranchRanking();
+        loadedKPIs = parseCSV(csvText).map(prepareKPI).filter(Boolean);
+        if (!loadedKPIs.length) throw new Error("No valid KPI rows");
+        renderScorecardTabs();
+        renderActiveScorecard();
+      } catch (error) {
+        document.getElementById("scorecardTabs").innerHTML = "";
+        document.getElementById("scorecardContent").innerHTML = `
+          <div class="kpi-message">
+            Upload the CSV beside <code>index.html</code> and name it
+            <code>kpi-summary.csv</code> or
+            <code>PMO_TQM_KPIs Monitored by TQM_FNL_150926.csv</code>.
+          </div>`;
+      }
+    }
+
+    /* =====================================================
+       POWER BI REPORTS
+    ====================================================== */
+    const reports = {
+      quality: {
+        title: "Quality Visits Dashboard",
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+      it: {
+        title: "IT KPIs Dashboard",
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=6d7d73ee-36e2-447a-850f-7a940ec52bb2" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+      ops: {
+        title: "Operations KPIs Dashboard",
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=4d6d3f56-578d-4ae9-8794-50e3c88b739f" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+      admin: {
+        title: "Admin KPIs Dashboard",
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=c3a3c7b7-7600-47fe-b675-9aad74e24e9d" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+      incidents: {
+        title: "COO Area Incidents Dashboard",
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=14f20afc-1d09-4fc1-bd6c-0e7b41ed69de" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      }
+    };
+
+    function openReport(reportKey) {
+      const reportInfo = reports[reportKey];
+      if (!reportInfo) {
+        alert("Dashboard configuration was not found.");
+        return;
+      }
+
+      document.getElementById("mainHeader").style.display = "none";
+      document.getElementById("homePage").style.display = "none";
+      document.getElementById("footer").style.display = "none";
+      document.getElementById("viewerPage").style.display = "block";
+      document.getElementById("viewerTitle").textContent = reportInfo.title;
+      document.getElementById("reportContainer").innerHTML = `
+        <iframe
+          src="${reportInfo.embedUrl}"
+          title="${reportInfo.title}"
+          allowfullscreen="true"
+          allow="fullscreen"
+          loading="eager">
+        </iframe>`;
+
+      document.body.style.overflow = "hidden";
+      window.scrollTo(0, 0);
+    }
+
+    function goHome() {
+      document.getElementById("reportContainer").innerHTML = "";
+      document.getElementById("viewerPage").style.display = "none";
+      document.getElementById("mainHeader").style.display = "flex";
+      document.getElementById("homePage").style.display = "block";
+      document.getElementById("footer").style.display = "block";
+      document.body.style.overflow = "auto";
+      window.scrollTo(0, 0);
+    }
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        const viewer = document.getElementById("viewerPage");
+        if (viewer.style.display === "block") goHome();
+      }
+    });
+
+    loadKPIScorecard();
+  </script>
+</body>
+</html>
