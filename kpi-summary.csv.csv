@@ -1,0 +1,43 @@
+﻿Dashboard Name,KPI,Value
+Quality Visits dashboard,% of Visits Conducted,58%
+Quality Visits dashboard,Total Quality Findings,1268
+Quality Visits dashboard,Quality Findings Closure Rate,15%
+Quality Visits dashboard,COO Area Closure Rate,14%
+Quality Visits dashboard,% of COO Area findings out of Total Quality Findings,69%
+IT KPIs Dashboard,Total IT Tickets,54234
+IT KPIs Dashboard,IT Tickets Closure Rate,96%
+IT KPIs Dashboard,IT Tickets SLA Compliance Level,93%
+IT KPIs Dashboard,Overall Satisfaction Level,84%
+IT KPIs Dashboard,Total Escalated Tickets to TQM,0.37%
+IT KPIs Dashboard,Total CRs,470
+IT KPIs Dashboard,CRs Closure Rate,38%
+IT KPIs Dashboard,High Priority CRs Rate,49%
+IT KPIs Dashboard,Onsite ATM Availability,94.00%
+IT KPIs Dashboard,Offsite ATM Availability,94.00%
+IT KPIs Dashboard,Overall ATM Availability,94.40%
+IT KPIs Dashboard,Jun - Aug Onsite ATM Availability,94.09%
+IT KPIs Dashboard,Jun - Aug Offsite ATM Availability,94.58%
+IT KPIs Dashboard,Jan - Aug ATM Availability ,94.34%
+Admin KPIs Dashboard,Total Admin Tickets,3027
+Admin KPIs Dashboard,Admin Division Tickets Closure Rate,68%
+Admin KPIs Dashboard,Facilities Tickets SLA Compliance Rate,83%
+Admin KPIs Dashboard,Invoices Closure Rate,84%
+Admin KPIs Dashboard,Invoices SLA Compliance Level,7%
+Admin KPIs Dashboard,Total Valid PRs,506
+Admin KPIs Dashboard,PRs Closure Rate,72%
+Admin KPIs Dashboard,Q1 till Q2 Total Cost Saving in USD ,"2,996,847"
+Admin KPIs Dashboard,Q1 till Q2 Total Cost Saving in EGP,"35,175,158"
+Operations KPIs Dashboard,Total Ops Tickets,169716
+Operations KPIs Dashboard,Total Served Customers,40808
+Operations KPIs Dashboard,Overall Ops Tickets Closure Rate,93%
+Operations KPIs Dashboard,ECM Tickets SLA Compliance Level,97%
+Operations KPIs Dashboard,% of Customer Impacted by SLA Violation,8%
+Operations KPIs Dashboard,Total Operations Division Transactions,"41,666,047"
+Operations KPIs Dashboard,Total Operations Division Revenues,"14,684,248,914"
+COO Area Incidents Dashboard,Total COO Area Incidents,33
+COO Area Incidents Dashboard,COO Area Incidents Closure Rate,45%
+COO Area Incidents Dashboard,Total Actions for Incidents ,27
+COO Area Incidents Dashboard,Closure Rate of  Actions for Incidents,56%
+COO Area Incidents Dashboard,% of IT Owned Incidents,58%
+COO Area Incidents Dashboard,% of Admin Owned Incidents,9%
+COO Area Incidents Dashboard,% of Ops Owned Incidents,33%
