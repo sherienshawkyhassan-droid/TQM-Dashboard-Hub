@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TQM Analytics Hub | ABK</title>
 
   <style>
@@ -76,13 +76,13 @@
       display: block;
     }
 
+    /* HOME PAGE */
+
     .container {
       width: 90%;
       max-width: 1250px;
       margin: 40px auto 50px;
     }
-
-    /* WELCOME */
 
     .welcome {
       text-align: center;
@@ -192,6 +192,8 @@
       flex: 0 0 auto;
       padding: 10px 16px;
       color: var(--abk-blue);
+      font-family: "Tw Cen MT", Arial, sans-serif;
+      font-size: 11pt;
       font-weight: 600;
       background: #EDF6FA;
       border: 1px solid #C8E0EC;
@@ -301,7 +303,7 @@
       font-weight: 600;
     }
 
-    /* DASHBOARD CARDS */
+    /* DASHBOARD GRID */
 
     .dashboard-grid {
       display: grid;
@@ -319,7 +321,9 @@
       border-top: 5px solid var(--abk-yellow);
       border-radius: 14px;
       box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
     }
 
     .dashboard-card:hover {
@@ -346,6 +350,7 @@
       width: 100%;
       padding: 13px 18px;
       color: var(--white);
+      font-family: "Tw Cen MT", Arial, sans-serif;
       font-size: 12pt;
       font-weight: 600;
       background: var(--abk-blue);
@@ -388,6 +393,7 @@
       justify-self: start;
       padding: 10px 16px;
       color: var(--white);
+      font-family: "Tw Cen MT", Arial, sans-serif;
       font-size: 12pt;
       font-weight: 600;
       background: var(--abk-blue);
@@ -501,6 +507,8 @@
 
 <body>
 
+  <!-- HEADER -->
+
   <header class="header" id="mainHeader">
     <div class="header-text">
       <h1>TQM Analytics Hub</h1>
@@ -510,9 +518,10 @@
     <img
       src="abk-logo.png"
       alt="ABK Logo"
-      class="abk-logo"
-    />
+      class="abk-logo">
   </header>
+
+  <!-- HOME PAGE -->
 
   <main class="container" id="homePage">
 
@@ -534,8 +543,8 @@
 
     <section
       class="scorecard-section"
-      aria-labelledby="scorecardHeading"
-    >
+      aria-labelledby="scorecardHeading">
+
       <div class="scorecard-header">
         <div>
           <h2 id="scorecardHeading">
@@ -552,16 +561,16 @@
         </div>
       </div>
 
-      <!-- PERFORMANCE THRESHOLDS -->
+      <!-- RAG THRESHOLDS -->
 
       <div
         class="threshold-legend"
-        aria-label="KPI performance thresholds"
-      >
+        aria-label="KPI performance thresholds">
+
         <div
           class="threshold-item"
-          style="--threshold-colour: var(--rag-green)"
-        >
+          style="--threshold-colour: var(--rag-green)">
+
           <strong>Green (≥ 85%)</strong>
 
           Meeting or exceeding the required standards.
@@ -570,8 +579,8 @@
 
         <div
           class="threshold-item"
-          style="--threshold-colour: var(--rag-amber)"
-        >
+          style="--threshold-colour: var(--rag-amber)">
+
           <strong>Amber (70%–84%)</strong>
 
           Acceptable but at risk. Performance should be closely
@@ -580,8 +589,8 @@
 
         <div
           class="threshold-item"
-          style="--threshold-colour: var(--rag-red)"
-        >
+          style="--threshold-colour: var(--rag-red)">
+
           <strong>Red (&lt; 70%)</strong>
 
           Below acceptable levels. Immediate attention from the
@@ -589,21 +598,22 @@
         </div>
       </div>
 
-      <!-- DASHBOARD KPI TABS -->
+      <!-- DASHBOARD TABS -->
 
       <div
         class="scorecard-tabs"
         id="scorecardTabs"
-        role="tablist"
-      ></div>
+        role="tablist">
+      </div>
 
-      <!-- GAUGES APPEAR HERE -->
+      <!-- GAUGES -->
 
       <div id="scorecardContent">
         <div class="kpi-message">
           Loading KPI scorecard…
         </div>
       </div>
+
     </section>
 
     <!-- DASHBOARD CARDS -->
@@ -622,8 +632,7 @@
 
         <button
           class="dashboard-button"
-          onclick="openReport('quality')"
-        >
+          onclick="openReport('quality')">
           View Dashboard
         </button>
       </div>
@@ -640,8 +649,7 @@
 
         <button
           class="dashboard-button"
-          onclick="openReport('it')"
-        >
+          onclick="openReport('it')">
           View Dashboard
         </button>
       </div>
@@ -658,8 +666,7 @@
 
         <button
           class="dashboard-button"
-          onclick="openReport('ops')"
-        >
+          onclick="openReport('ops')">
           View Dashboard
         </button>
       </div>
@@ -676,8 +683,7 @@
 
         <button
           class="dashboard-button"
-          onclick="openReport('admin')"
-        >
+          onclick="openReport('admin')">
           View Dashboard
         </button>
       </div>
@@ -694,8 +700,7 @@
 
         <button
           class="dashboard-button"
-          onclick="openReport('incidents')"
-        >
+          onclick="openReport('incidents')">
           View Dashboard
         </button>
       </div>
@@ -711,8 +716,7 @@
 
       <button
         class="back-button"
-        onclick="goHome()"
-      >
+        onclick="goHome()">
         ← Dashboard Hub
       </button>
 
@@ -723,12 +727,12 @@
       <img
         src="abk-logo.png"
         alt="ABK Logo"
-        class="viewer-logo"
-      />
+        class="viewer-logo">
 
     </div>
 
     <div id="reportContainer"></div>
+
   </section>
 
   <!-- FOOTER -->
@@ -742,17 +746,13 @@
   <script>
 
     /* =====================================================
-       KPI CSV FILES
+       KPI SCORECARD SETTINGS
     ====================================================== */
 
     const KPI_FILES = [
       "kpi-summary.csv",
       "PMO_TQM_KPIs Monitored by TQM_FNL_150926.csv"
     ];
-
-    /* =====================================================
-       DASHBOARD NAMES USED IN THE CSV
-    ====================================================== */
 
     const scorecardDashboards = [
       {
@@ -764,7 +764,6 @@
           "quality"
         ]
       },
-
       {
         key: "it",
         title: "IT KPIs",
@@ -774,7 +773,6 @@
           "it"
         ]
       },
-
       {
         key: "admin",
         title: "Administration KPIs",
@@ -785,7 +783,6 @@
           "administration"
         ]
       },
-
       {
         key: "ops",
         title: "Operations KPIs",
@@ -817,9 +814,7 @@
         .replaceAll("'", "&#039;");
     }
 
-    /* =====================================================
-       READ CSV
-    ====================================================== */
+    /* CSV parser supporting commas inside quoted values */
 
     function parseCSV(text) {
       const rows = [];
@@ -858,7 +853,8 @@
         }
 
         else if (
-          (character === "\n" || character === "\r") &&
+          (character === "\n" ||
+           character === "\r") &&
           !quoted
         ) {
           if (
@@ -906,15 +902,16 @@
           ).trim()
       );
 
-      return rows.slice(1).map(values =>
-        Object.fromEntries(
-          headings.map(
-            (heading, index) => [
-              heading,
-              values[index] || ""
-            ]
+      return rows.slice(1).map(
+        values =>
+          Object.fromEntries(
+            headings.map(
+              (heading, index) => [
+                heading,
+                values[index] || ""
+              ]
+            )
           )
-        )
       );
     }
 
@@ -929,8 +926,6 @@
         ? parsed
         : 0;
     }
-
-    /* Creates an automatic maximum for count-based gauges */
 
     function niceMaximum(value) {
       if (value <= 0) {
@@ -954,13 +949,537 @@
       );
     }
 
-    /* =====================================================
-       PREPARE EACH KPI
-    ====================================================== */
+    /* PREPARE EACH KPI */
 
     function prepareKPI(row) {
       const dashboard =
-        dashboardFromName(row["Dashboard Name"]);
+        dashboardFromName(
+          row["Dashboard Name"]
+        );
 
       if (!dashboard || !row.KPI) {
-        return null
+        return null;
+      }
+
+      const originalValue =
+        String(row.Value || "").trim();
+
+      const isPercentage =
+        originalValue.includes("%");
+
+      const value =
+        numberFrom(originalValue);
+
+      const maximum =
+        isPercentage
+          ? 100
+          : niceMaximum(value);
+
+      let status = "blue";
+      let target = "Information";
+
+      if (isPercentage) {
+        status =
+          value >= 85
+            ? "green"
+            : value >= 70
+              ? "amber"
+              : "red";
+
+        target =
+          "Required standard ≥ 85%";
+      }
+
+      return {
+        dashboardKey: dashboard.key,
+        kpi: row.KPI.trim(),
+        value: value,
+        originalValue: originalValue,
+        isPercentage: isPercentage,
+        maximum: maximum,
+        status: status,
+        target: target,
+        percentage: Math.max(
+          0,
+          Math.min(
+            100,
+            (value / maximum) * 100
+          )
+        )
+      };
+    }
+
+    function statusColour(status) {
+      const colours = {
+        green: "var(--rag-green)",
+        amber: "var(--rag-amber)",
+        red: "var(--rag-red)",
+        blue: "var(--abk-blue)"
+      };
+
+      return colours[status] ||
+        colours.blue;
+    }
+
+    function compactNumber(value) {
+      return new Intl.NumberFormat(
+        "en-US",
+        {
+          notation:
+            value >= 1000
+              ? "compact"
+              : "standard",
+
+          maximumFractionDigits: 2
+        }
+      ).format(value);
+    }
+
+    function displayValue(kpi) {
+      if (kpi.isPercentage) {
+        return `${kpi.value}%`;
+      }
+
+      const name =
+        normalise(kpi.kpi);
+
+      if (name.includes("usd")) {
+        return `$${compactNumber(kpi.value)}`;
+      }
+
+      if (name.includes("egp")) {
+        return `EGP ${compactNumber(kpi.value)}`;
+      }
+
+      return compactNumber(kpi.value);
+    }
+
+    /* CREATE ONE GAUGE */
+
+    function gaugeHTML(kpi) {
+      const maximumLabel =
+        kpi.isPercentage
+          ? "100"
+          : compactNumber(kpi.maximum);
+
+      return `
+        <article
+          class="gauge-card"
+          style="--gauge-colour:${statusColour(kpi.status)}"
+          title="Exact value: ${escapeHTML(kpi.originalValue)}">
+
+          <svg
+            viewBox="0 0 200 120"
+            role="img"
+            aria-label="${escapeHTML(kpi.kpi)}: ${escapeHTML(kpi.originalValue)}">
+
+            <path
+              class="gauge-track"
+              d="M 20 100 A 80 80 0 0 1 180 100"
+              pathLength="100">
+            </path>
+
+            <path
+              class="gauge-progress"
+              d="M 20 100 A 80 80 0 0 1 180 100"
+              pathLength="100"
+              stroke-dasharray="${kpi.percentage.toFixed(1)} 100">
+            </path>
+
+            <text
+              class="gauge-value"
+              x="100"
+              y="91"
+              text-anchor="middle">
+
+              ${escapeHTML(displayValue(kpi))}
+            </text>
+
+            <text
+              class="gauge-scale"
+              x="18"
+              y="116">
+              0
+            </text>
+
+            <text
+              class="gauge-scale"
+              x="182"
+              y="116"
+              text-anchor="end">
+
+              ${maximumLabel}
+            </text>
+
+          </svg>
+
+          <div class="gauge-name">
+            ${escapeHTML(kpi.kpi)}
+          </div>
+
+          <div class="gauge-target">
+            <span class="status-dot"></span>
+            ${escapeHTML(kpi.target)}
+          </div>
+
+        </article>
+      `;
+    }
+
+    /* CREATE DASHBOARD TABS */
+
+    function renderScorecardTabs() {
+      const available =
+        scorecardDashboards.filter(
+          dashboard =>
+            loadedKPIs.some(
+              kpi =>
+                kpi.dashboardKey ===
+                dashboard.key
+            )
+        );
+
+      if (
+        !available.some(
+          dashboard =>
+            dashboard.key ===
+            activeScorecard
+        )
+      ) {
+        activeScorecard =
+          available.length
+            ? available[0].key
+            : "quality";
+      }
+
+      document
+        .getElementById("scorecardTabs")
+        .innerHTML =
+          available.map(
+            dashboard => `
+              <button
+                type="button"
+                class="scorecard-tab ${
+                  dashboard.key ===
+                  activeScorecard
+                    ? "active"
+                    : ""
+                }"
+                role="tab"
+                aria-selected="${
+                  dashboard.key ===
+                  activeScorecard
+                }"
+                onclick="selectScorecard('${dashboard.key}')">
+
+                ${escapeHTML(dashboard.title)}
+              </button>
+            `
+          ).join("");
+    }
+
+    /* DISPLAY ACTIVE DASHBOARD GAUGES */
+
+    function renderActiveScorecard() {
+      const dashboard =
+        scorecardDashboards.find(
+          item =>
+            item.key === activeScorecard
+        );
+
+      const kpis =
+        loadedKPIs.filter(
+          kpi =>
+            kpi.dashboardKey ===
+            activeScorecard
+        );
+
+      document
+        .getElementById("scorecardContent")
+        .innerHTML = `
+          <h3 class="scorecard-title">
+            ${escapeHTML(
+              dashboard
+                ? dashboard.title
+                : "KPI Summary"
+            )}
+          </h3>
+
+          <div class="gauge-grid">
+            ${kpis.map(gaugeHTML).join("")}
+          </div>
+        `;
+    }
+
+    function selectScorecard(key) {
+      activeScorecard = key;
+
+      renderScorecardTabs();
+      renderActiveScorecard();
+    }
+
+    /* FIND CSV FILE */
+
+    async function fetchFirstAvailableCSV() {
+      for (
+        const filename of KPI_FILES
+      ) {
+        try {
+          const response =
+            await fetch(
+              encodeURI(filename) +
+              "?v=" +
+              Date.now(),
+              {
+                cache: "no-store"
+              }
+            );
+
+          if (response.ok) {
+            return await response.text();
+          }
+        }
+
+        catch (error) {
+          console.log(
+            "Could not load:",
+            filename
+          );
+        }
+      }
+
+      throw new Error(
+        "KPI CSV file was not found."
+      );
+    }
+
+    /* LOAD KPI SCORECARD */
+
+    async function loadKPIScorecard() {
+      try {
+        const csvText =
+          await fetchFirstAvailableCSV();
+
+        const csvRows =
+          parseCSV(csvText);
+
+        loadedKPIs =
+          csvRows
+            .map(prepareKPI)
+            .filter(
+              kpi => kpi !== null
+            );
+
+        if (!loadedKPIs.length) {
+          throw new Error(
+            "No valid KPI rows were found."
+          );
+        }
+
+        renderScorecardTabs();
+        renderActiveScorecard();
+      }
+
+      catch (error) {
+        console.error(
+          "KPI scorecard error:",
+          error
+        );
+
+        document
+          .getElementById("scorecardTabs")
+          .innerHTML = "";
+
+        document
+          .getElementById("scorecardContent")
+          .innerHTML = `
+            <div class="kpi-message">
+              The KPI file could not be loaded.
+              Confirm that
+              <code>kpi-summary.csv</code>
+              is in the same GitHub folder as
+              <code>index.html</code>.
+            </div>
+          `;
+      }
+    }
+
+    /* POWER BI REPORTS */
+
+    const reports = {
+      quality: {
+        title:
+          "Quality Visits Dashboard",
+
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=a6d65b4c-579d-4bbd-b28c-c5c1df1c3d99" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+
+      it: {
+        title:
+          "IT KPIs Dashboard",
+
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=6d7d73ee-36e2-447a-850f-7a940ec52bb2" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+
+      ops: {
+        title:
+          "Operations KPIs Dashboard",
+
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=4d6d3f56-578d-4ae9-8794-50e3c88b739f" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+
+      admin: {
+        title:
+          "Admin KPIs Dashboard",
+
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=c3a3c7b7-7600-47fe-b675-9aad74e24e9d" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      },
+
+      incidents: {
+        title:
+          "COO Area Incidents Dashboard",
+
+        embedUrl:
+          "https://app.powerbi.com/reportEmbed" +
+          "?reportId=14f20afc-1d09-4fc1-bd6c-0e7b41ed69de" +
+          "&autoAuth=true" +
+          "&ctid=7a09d8f3-71ea-494a-b504-36d7ece273f3" +
+          "&filterPaneEnabled=false" +
+          "&navContentPaneEnabled=true"
+      }
+    };
+
+    /* OPEN POWER BI DASHBOARD */
+
+    function openReport(reportKey) {
+      const reportInfo =
+        reports[reportKey];
+
+      if (!reportInfo) {
+        alert(
+          "Dashboard configuration was not found."
+        );
+
+        return;
+      }
+
+      document
+        .getElementById("mainHeader")
+        .style.display = "none";
+
+      document
+        .getElementById("homePage")
+        .style.display = "none";
+
+      document
+        .getElementById("footer")
+        .style.display = "none";
+
+      document
+        .getElementById("viewerPage")
+        .style.display = "block";
+
+      document
+        .getElementById("viewerTitle")
+        .textContent =
+          reportInfo.title;
+
+      document
+        .getElementById("reportContainer")
+        .innerHTML = `
+          <iframe
+            src="${reportInfo.embedUrl}"
+            title="${reportInfo.title}"
+            allowfullscreen="true"
+            allow="fullscreen"
+            loading="eager">
+          </iframe>
+        `;
+
+      document.body.style.overflow =
+        "hidden";
+
+      window.scrollTo(0, 0);
+    }
+
+    /* RETURN TO HUB */
+
+    function goHome() {
+      document
+        .getElementById("reportContainer")
+        .innerHTML = "";
+
+      document
+        .getElementById("viewerPage")
+        .style.display = "none";
+
+      document
+        .getElementById("mainHeader")
+        .style.display = "flex";
+
+      document
+        .getElementById("homePage")
+        .style.display = "block";
+
+      document
+        .getElementById("footer")
+        .style.display = "block";
+
+      document.body.style.overflow =
+        "auto";
+
+      window.scrollTo(0, 0);
+    }
+
+    /* ESC KEY RETURNS TO HUB */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+        if (event.key === "Escape") {
+          const viewer =
+            document.getElementById(
+              "viewerPage"
+            );
+
+          if (
+            viewer.style.display ===
+            "block"
+          ) {
+            goHome();
+          }
+        }
+      }
+    );
+
+    /* START SCORECARD */
+
+    loadKPIScorecard();
+
+  </script>
+</body>
+</html>
