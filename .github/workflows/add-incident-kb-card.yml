@@ -1,0 +1,66 @@
+name: Add TQM Incidents Knowledge Base card
+
+on:
+  push:
+    paths:
+      - '.github/workflows/add-incident-kb-card.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch-hub:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add Knowledge Base card safely
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          if 'TQM Incidents Knowledge Base' in s:
+              print('Knowledge Base card already present; no change needed.')
+              raise SystemExit(0)
+          marker = '''      <div class="dashboard-card">
+        <div>
+          <div class="dashboard-visual" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M24 5l17 7v11c0 10-7 17-17 21C14 40 7 33 7 23V12z"/><path class="accent" d="M16 25l6 6 11-13"/></svg>
+          </div>
+          <h3>COO Area Incidents Dashboard</h3>
+          <p>Monitor incidents, root causes, severity, trends and corrective actions.</p>
+        </div>
+        <button class="dashboard-button" onclick="openReport('incidents')">View Dashboard</button>
+      </div>'''
+          new_card = '''
+
+      <div class="dashboard-card">
+        <div>
+          <div class="dashboard-visual" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 8h24a4 4 0 0 1 4 4v28H14a4 4 0 0 1-4-4z"/>
+              <path class="accent" d="M17 17h14M17 24h14M17 31h8"/>
+              <circle cx="36" cy="34" r="6"/>
+              <path d="M40.5 38.5L45 43"/>
+            </svg>
+          </div>
+          <h3>TQM Incidents Knowledge Base</h3>
+          <p>Incident search, repeated incidents, root-cause intelligence and action tracking.</p>
+        </div>
+        <button class="dashboard-button" onclick="window.location.href='incident-intelligence.html'">Open Knowledge Base</button>
+      </div>'''
+          if marker not in s:
+              raise SystemExit('Expected COO Area Incidents card marker was not found; refusing unsafe edit.')
+          p.write_text(s.replace(marker, marker + new_card, 1), encoding='utf-8')
+      - name: Commit Hub update
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add TQM Incidents Knowledge Base card to Analytics Hub"
+          git push
