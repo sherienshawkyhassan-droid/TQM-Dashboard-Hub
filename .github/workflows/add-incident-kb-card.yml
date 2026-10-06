@@ -1,66 +1,39 @@
-name: Add TQM Incidents Knowledge Base card
+name: Verify TQM Incidents Knowledge Base integration
 
 on:
   push:
+    branches: ["main"]
     paths:
       - '.github/workflows/add-incident-kb-card.yml'
+      - 'index.html'
+      - 'incident-intelligence.html'
+      - 'kpi-summary.csv'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  patch-hub:
+  verify-hub:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add Knowledge Base card safely
+      - name: Verify incident source and Hub destinations
         shell: python
         run: |
+          import csv
           from pathlib import Path
-          p = Path('index.html')
-          s = p.read_text(encoding='utf-8')
-          if 'TQM Incidents Knowledge Base' in s:
-              print('Knowledge Base card already present; no change needed.')
-              raise SystemExit(0)
-          marker = '''      <div class="dashboard-card">
-        <div>
-          <div class="dashboard-visual" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M24 5l17 7v11c0 10-7 17-17 21C14 40 7 33 7 23V12z"/><path class="accent" d="M16 25l6 6 11-13"/></svg>
-          </div>
-          <h3>COO Area Incidents Dashboard</h3>
-          <p>Monitor incidents, root causes, severity, trends and corrective actions.</p>
-        </div>
-        <button class="dashboard-button" onclick="openReport('incidents')">View Dashboard</button>
-      </div>'''
-          new_card = '''
-
-      <div class="dashboard-card">
-        <div>
-          <div class="dashboard-visual" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M10 8h24a4 4 0 0 1 4 4v28H14a4 4 0 0 1-4-4z"/>
-              <path class="accent" d="M17 17h14M17 24h14M17 31h8"/>
-              <circle cx="36" cy="34" r="6"/>
-              <path d="M40.5 38.5L45 43"/>
-            </svg>
-          </div>
-          <h3>TQM Incidents Knowledge Base</h3>
-          <p>Incident search, repeated incidents, root-cause intelligence and action tracking.</p>
-        </div>
-        <button class="dashboard-button" onclick="window.location.href='incident-intelligence.html'">Open Knowledge Base</button>
-      </div>'''
-          if marker not in s:
-              raise SystemExit('Expected COO Area Incidents card marker was not found; refusing unsafe edit.')
-          p.write_text(s.replace(marker, marker + new_card, 1), encoding='utf-8')
-      - name: Commit Hub update
-        run: |
-          if git diff --quiet; then
-            echo "No changes to commit"
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Add TQM Incidents Knowledge Base card to Analytics Hub"
-          git push
+          hub = Path('index.html').read_text(encoding='utf-8')
+          kb = Path('incident-intelligence.html').read_text(encoding='utf-8')
+          report_id = '14f20afc-1d09-4fc1-bd6c-0e7b41ed69de'
+          assert 'TQM Incidents Knowledge Base' in hub
+          assert 'href="incident-intelligence.html"' in hub
+          assert "openReport('incidents')" in hub
+          assert 'COO Area Incidents Dashboard' in hub
+          assert report_id in hub and report_id in kb
+          assert 'autoAuth=true' in kb
+          assert 'app.powerbi.com/view?r=' not in kb
+          assert "dashboard.key === \"incidents\" || !row.KPI" in hub
+          with Path('kpi-summary.csv').open(encoding='utf-8-sig', newline='') as f:
+              assert all('incident' not in row['Dashboard Name'].lower() for row in csv.DictReader(f))
+          print('Knowledge Base linked; original dashboard retained; incident CSV values excluded.')
