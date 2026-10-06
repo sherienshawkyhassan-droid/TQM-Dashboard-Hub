@@ -735,16 +735,7 @@
         <button class="dashboard-button" onclick="openReport('incidents')">View Dashboard</button>
       </div>
 
-      <div class="dashboard-card">
-        <div>
-          <div class="dashboard-visual" aria-hidden="true">
-            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 8h24a4 4 0 0 1 4 4v28H14a4 4 0 0 1-4-4z"/><path class="accent" d="M17 17h14M17 24h14M17 31h8"/><circle cx="36" cy="34" r="6"/><path d="M40.5 38.5L45 43"/></svg>
-          </div>
-          <h3>TQM Incidents Knowledge Base</h3>
-          <p>Explore incident records, recurrence, root causes and actions through the authenticated Power BI report.</p>
-        </div>
-        <a class="dashboard-button" style="text-decoration:none;text-align:center" href="incident-intelligence.html">Open Knowledge Base</a>
-      </div>
+
     </div>
   </main>
 
@@ -1123,8 +1114,7 @@
         document.getElementById("scorecardContent").innerHTML = `
           <h3 class="scorecard-title">COO Area Incidents</h3>
           <div class="kpi-message">View current incident KPIs in the authenticated Power BI report.</div>
-          <button class="dashboard-button" onclick="openReport('incidents')">View Incident KPIs</button>
-          <a href="incident-intelligence.html">Open TQM Incidents Knowledge Base</a>`;
+          <button class="dashboard-button" onclick="openReport('incidents')">View Incident KPIs</button>`;
         return;
       }
       const dashboard = scorecardDashboards.find(item => item.key === activeScorecard);

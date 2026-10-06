@@ -1,12 +1,11 @@
-name: Verify TQM Incidents Knowledge Base integration
+name: Verify TQM Analytics Hub
 
 on:
   push:
     branches: ["main"]
     paths:
-      - '.github/workflows/add-incident-kb-card.yml'
+      - '.github/workflows/verify-hub.yml'
       - 'index.html'
-      - 'incident-intelligence.html'
       - 'kpi-summary.csv'
   workflow_dispatch:
 
@@ -24,16 +23,14 @@ jobs:
           import csv
           from pathlib import Path
           hub = Path('index.html').read_text(encoding='utf-8')
-          kb = Path('incident-intelligence.html').read_text(encoding='utf-8')
           report_id = '14f20afc-1d09-4fc1-bd6c-0e7b41ed69de'
-          assert 'TQM Incidents Knowledge Base' in hub
-          assert 'href="incident-intelligence.html"' in hub
+          assert 'incident-intelligence.html' not in hub
+          assert not Path('incident-intelligence.html').exists()
+          assert hub.count('class="dashboard-card') == 5
           assert "openReport('incidents')" in hub
           assert 'COO Area Incidents Dashboard' in hub
-          assert report_id in hub and report_id in kb
-          assert 'autoAuth=true' in kb
-          assert 'app.powerbi.com/view?r=' not in kb
+          assert report_id in hub
           assert "dashboard.key === \"incidents\" || !row.KPI" in hub
           with Path('kpi-summary.csv').open(encoding='utf-8-sig', newline='') as f:
               assert all('incident' not in row['Dashboard Name'].lower() for row in csv.DictReader(f))
-          print('Knowledge Base linked; original dashboard retained; incident CSV values excluded.')
+          print('Five dashboards retained; online knowledge page removed; incident CSV values excluded.')
