@@ -928,7 +928,14 @@
       let status = "blue";
       let target = "Information";
 
-      if (isNonRAGGauge) {
+      if (isATM && !isInformation && isPercentage) {
+        status = value >= 97 ? "green" : value >= 95 ? "amber" : "red";
+        target = value >= 97
+          ? "Low Risk · Exceeds stakeholder’s expectation"
+          : value >= 95
+            ? "Medium Risk · Maintaining reputation"
+            : "High Risk · Poor Image";
+      } else if (isNonRAGGauge) {
         status = "blue";
         target = "";
       } else if (!isInformation && isPercentage) {
@@ -1130,6 +1137,20 @@
       const atmKPIs = kpis.filter(kpi => kpi.isATM);
       const atmSection = atmKPIs.length ? `
         <h4 class="metric-section-title">ATM KPIs (As reported to ABK-Kuwait)</h4>
+        <div class="threshold-legend" aria-label="ATM availability risk thresholds" style="margin:0 0 16px">
+          <div class="threshold-item" style="--threshold-colour:var(--rag-green)">
+            <strong>Low Risk · Availability ≥ 97%</strong>
+            Exceeds stakeholder’s expectation.
+          </div>
+          <div class="threshold-item" style="--threshold-colour:var(--rag-amber)">
+            <strong>Medium Risk · 95% ≤ Availability &lt; 97%</strong>
+            Maintaining reputation.
+          </div>
+          <div class="threshold-item" style="--threshold-colour:var(--rag-red)">
+            <strong>High Risk · Availability &lt; 95%</strong>
+            Poor Image.
+          </div>
+        </div>
         <div class="gauge-grid">${atmKPIs.map(kpi => kpi.isInformation ? informationCardHTML(kpi) : gaugeHTML(kpi)).join("")}</div>` : "";
       const incidentReport = activeScorecard === "incidents" ? `
         <button class="dashboard-button" style="margin-top:20px" onclick="openReport('incidents')">View Incidents Dashboard</button>` : "";
