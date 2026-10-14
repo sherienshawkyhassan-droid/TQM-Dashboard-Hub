@@ -605,13 +605,14 @@
     }
     .branch-ranking-legend span { display: inline-flex; align-items: center; gap: 5px; }
     .legend-swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+    .legend-y24 { background: #FFC000; }
     .legend-y25 { background: #8F898B; }
     .legend-y26 { background: #007DBA; }
-    .branch-ranking-chart { min-width: 1040px; width: 100%; height: 245px; }
+    .branch-ranking-chart { min-width: 700px; width: 100%; }
     .branch-ranking-chart svg { width: 100%; height: 100%; display: block; overflow: visible; }
     @media (max-width: 800px) {
       .branch-ranking-section { border-radius: 18px; }
-      .branch-ranking-chart { min-width: 980px; }
+      .branch-ranking-chart { min-width: 700px; }
     }
 
   </style>
@@ -1045,9 +1046,10 @@
           const rows = parseCSV(await response.text());
           branchRankingData = rows.map(row => ({
             branch: String(row["Branch Name"] || "").trim(),
-            y25: numberFrom(row["Y25 Comparable Branch Rank"]),
-            y26: numberFrom(row["Y26 Comparable Branch Rank"])
-          })).filter(row => row.branch && row.y25 > 0 && row.y26 > 0);
+            y24: numberFrom(row["Y24 Branch Rank"]),
+            y25: numberFrom(row["Y25 Branch Rank"] || row["Y25 Comparable Branch Rank"]),
+            y26: numberFrom(row["Y26 Branch Rank"] || row["Y26 Comparable Branch Rank"])
+          })).filter(row => row.branch && (row.y24 > 0 || row.y25 > 0 || row.y26 > 0));
           return;
         } catch (error) {
           /* Continue to the next accepted filename. */
@@ -1067,48 +1069,54 @@
           </section>`;
       }
 
-      const maxRank = Math.max(16, ...branchRankingData.flatMap(row => [row.y25, row.y26]));
-      const width = 1120;
-      const height = 245;
-      const top = 38;
-      const bottom = 42;
-      const left = 18;
-      const right = 18;
-      const plotHeight = height - top - bottom;
+      const series = [
+        { key: "y24", label: "Y24 Branch Rank", colour: "#FFC000" },
+        { key: "y25", label: "Y25 Branch Rank", colour: "#8F898B" },
+        { key: "y26", label: "Y26 Branch Rank", colour: "#007DBA" }
+      ].filter(item => branchRankingData.some(row => row[item.key] > 0));
+      const maxRank = Math.ceil(Math.max(10, ...branchRankingData.flatMap(row => series.map(item => row[item.key]))) / 10) * 10;
+      const width = 1000;
+      const left = 150;
+      const right = 55;
+      const top = 35;
+      const groupHeight = series.length * 18 + 15;
+      const height = top + branchRankingData.length * groupHeight + 35;
       const plotWidth = width - left - right;
-      const groupWidth = plotWidth / branchRankingData.length;
-      const barWidth = Math.min(24, groupWidth * 0.34);
-
-      const bars = branchRankingData.map((row, index) => {
-        const center = left + groupWidth * index + groupWidth / 2;
-        const y25Height = (row.y25 / maxRank) * plotHeight;
-        const y26Height = (row.y26 / maxRank) * plotHeight;
-        const baseY = top + plotHeight;
-        const x25 = center - barWidth;
-        const x26 = center;
-        const y25Y = baseY - y25Height;
-        const y26Y = baseY - y26Height;
+      const axis = Array.from({ length: 6 }, (_, index) => {
+        const rank = index * maxRank / 5;
+        const x = left + rank / maxRank * plotWidth;
         return `
-          <rect x="${x25.toFixed(1)}" y="${y25Y.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${y25Height.toFixed(1)}" fill="#8F898B"></rect>
-          <rect x="${x26.toFixed(1)}" y="${y26Y.toFixed(1)}" width="${barWidth.toFixed(1)}" height="${y26Height.toFixed(1)}" fill="#007DBA"></rect>
-          <text x="${(x25 + barWidth / 2).toFixed(1)}" y="${Math.max(12, y25Y - 7).toFixed(1)}" text-anchor="middle" font-size="10" fill="#5B5B5B">${row.y25}</text>
-          <text x="${(x26 + barWidth / 2).toFixed(1)}" y="${Math.max(12, y26Y - 7).toFixed(1)}" text-anchor="middle" font-size="10" fill="#5B5B5B">${row.y26}</text>
-          <text x="${center.toFixed(1)}" y="${(baseY + 18).toFixed(1)}" text-anchor="middle" font-size="9" fill="#5B5B5B">${escapeHTML(row.branch)}</text>`;
+          <line x1="${x}" y1="25" x2="${x}" y2="${height - 25}" stroke="#E1EBF1"></line>
+          <text x="${x}" y="17" text-anchor="middle" font-size="11" fill="#5B5B5B">${rank}</text>`;
+      }).join("");
+      const bars = branchRankingData.map((row, index) => {
+        const y = top + index * groupHeight;
+        const label = `<text x="${left - 12}" y="${y + series.length * 9}" text-anchor="end" font-size="12" fill="#374151">${escapeHTML(row.branch)}</text>`;
+        return label + series.map((item, seriesIndex) => {
+          const rank = row[item.key];
+          const barY = y + seriesIndex * 18;
+          if (rank <= 0) return `<text x="${left + 5}" y="${barY + 12}" font-size="10" fill="#6B7280">Not reported</text>`;
+          const barWidth = rank / maxRank * plotWidth;
+          return `
+            <rect x="${left}" y="${barY}" width="${barWidth}" height="13" rx="2" fill="${item.colour}">
+              <title>${escapeHTML(row.branch)} — ${item.label}: ${rank}</title>
+            </rect>
+            <text x="${left + barWidth + 7}" y="${barY + 11}" font-size="11" fill="#374151">${rank}</text>`;
+        }).join("");
       }).join("");
 
       return `
         <section class="branch-ranking-section" aria-label="Branches ranking comparison">
           <div class="branch-ranking-header">
             <h4>Branches Ranking</h4>
-            <p>Based on COO owned findings Y25 Vs. Y26</p>
+            <p>Based on COO owned findings · Rank 1 is best; lower rank is better.</p>
           </div>
           <div class="branch-ranking-legend" aria-label="Chart legend">
-            <span><i class="legend-swatch legend-y25"></i>Y25 Comparable Branch Rank</span>
-            <span><i class="legend-swatch legend-y26"></i>Y26 Comparable Branch Rank</span>
+            ${series.map(item => `<span><i class="legend-swatch" style="background:${item.colour}"></i>${item.label}</span>`).join("")}
           </div>
-          <div class="branch-ranking-chart">
-            <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Y25 and Y26 comparable branch ranking grouped bar chart">
-              ${bars}
+          <div class="branch-ranking-chart" style="height:${height}px">
+            <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Y24, Y25 and Y26 branch ranks. Rank 1 is best.">
+              ${axis}${bars}
             </svg>
           </div>
         </section>`;
