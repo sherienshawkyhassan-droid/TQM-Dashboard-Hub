@@ -785,7 +785,7 @@
       {
         key: "it",
         title: "IT KPIs",
-        aliases: ["it kpis dashboard", "it kpis", "it"]
+        aliases: ["it kpis dashboard", "it kpis", "it", "atm kpis (as reported to abk-kuwait)"]
       },
       {
         key: "admin",
@@ -800,7 +800,7 @@
       {
         key: "incidents",
         title: "COO Area Incidents",
-        aliases: ["coo area incidents dashboard", "coo area incidents", "incidents dashboard", "incidents"]
+        aliases: ["coo area incidents dashboard", "coo area incidents", "incidents kpis dashboard", "incidents dashboard", "incidents"]
       }
     ];
 
@@ -819,6 +819,7 @@
       "total operations division transactions",
       "total operations division revenues",
       "total coo area incidents",
+      "total number of coo area incidents",
       "total actions for incidents"
     ]);
 
@@ -911,14 +912,15 @@
 
     function prepareKPI(row) {
       const dashboard = dashboardFromName(row["Dashboard Name"]);
-      // Incident figures must come from authenticated Power BI, never local CSV.
-      if (!dashboard || dashboard.key === "incidents" || !row.KPI) return null;
+      if (!dashboard || !row.KPI) return null;
 
       const originalValue = String(row.Value || "").trim();
+      const isTextValue = !originalValue || !Number.isFinite(Number(originalValue.replace(/[%,$£€\s]/g, "").replace(/,/g, "")));
+      const isATM = normalise(row["Dashboard Name"]) === "atm kpis (as reported to abk-kuwait)";
       const isPercentage = originalValue.includes("%");
       const normalisedKPI = normalise(row.KPI);
       const isNonRAGGauge = NON_RAG_GAUGE_KPIS.has(normalisedKPI);
-      const isInformation = INFORMATION_KPIS.has(normalisedKPI) || (!isPercentage && !isNonRAGGauge);
+      const isInformation = isTextValue || INFORMATION_KPIS.has(normalisedKPI) || (!isPercentage && !isNonRAGGauge);
       const value = numberFrom(originalValue);
       const maximum = isPercentage ? 100 : niceMaximum(value);
 
@@ -938,6 +940,8 @@
         kpi: row.KPI.trim(),
         value,
         originalValue,
+        isTextValue,
+        isATM,
         isPercentage,
         isInformation,
         isNonRAGGauge,
@@ -965,7 +969,8 @@
     }
 
     function displayValue(kpi) {
-      if (kpi.isPercentage) return `${kpi.value}%`;
+      if (kpi.isTextValue) return kpi.originalValue || "Not reported";
+      if (kpi.isPercentage) return kpi.originalValue;
       const name = normalise(kpi.kpi);
       if (name.includes("usd")) return `$${compactNumber(kpi.value)}`;
       if (name.includes("egp")) return `EGP ${compactNumber(kpi.value)}`;
@@ -1110,17 +1115,16 @@
     }
 
     function renderActiveScorecard() {
-      if (activeScorecard === "incidents") {
-        document.getElementById("scorecardContent").innerHTML = `
-          <h3 class="scorecard-title">COO Area Incidents</h3>
-          <div class="kpi-message">View current incident KPIs in the authenticated Power BI report.</div>
-          <button class="dashboard-button" onclick="openReport('incidents')">View Incident KPIs</button>`;
-        return;
-      }
       const dashboard = scorecardDashboards.find(item => item.key === activeScorecard);
       const kpis = loadedKPIs.filter(kpi => kpi.dashboardKey === activeScorecard);
-      const informationKPIs = kpis.filter(kpi => kpi.isInformation);
-      const performanceKPIs = kpis.filter(kpi => !kpi.isInformation);
+      const informationKPIs = kpis.filter(kpi => !kpi.isATM && kpi.isInformation);
+      const performanceKPIs = kpis.filter(kpi => !kpi.isATM && !kpi.isInformation);
+      const atmKPIs = kpis.filter(kpi => kpi.isATM);
+      const atmSection = atmKPIs.length ? `
+        <h4 class="metric-section-title">ATM KPIs (As reported to ABK-Kuwait)</h4>
+        <div class="gauge-grid">${atmKPIs.map(kpi => kpi.isInformation ? informationCardHTML(kpi) : gaugeHTML(kpi)).join("")}</div>` : "";
+      const incidentReport = activeScorecard === "incidents" ? `
+        <button class="dashboard-button" style="margin-top:20px" onclick="openReport('incidents')">View Incidents Dashboard</button>` : "";
 
       const informationSection = informationKPIs.length ? `
         <h4 class="metric-section-title">Information KPIs</h4>
@@ -1134,6 +1138,8 @@
         <h3 class="scorecard-title">${escapeHTML(dashboard?.title || "KPI Summary")}</h3>
         ${informationSection}
         ${performanceSection}
+        ${atmSection}
+        ${incidentReport}
         ${branchRankingHTML()}`;
     }
 
@@ -1276,3 +1282,4 @@
   </script>
 </body>
 </html>
+
